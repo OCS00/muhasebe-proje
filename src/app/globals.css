@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 51, 65, 85;
+  --background-rgb: 255, 255, 255;
+}
+
+body {
+  color: #334155;
+  background: #ffffff;
+}
+
+/* Scrollbar (Kaydırma Çubuğu) Rengi - Logo Mavisi */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #203478; /* Logo Mavisi */
+}
