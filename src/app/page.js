@@ -21,9 +21,9 @@ export default function Home() {
       <HomeBlog />
       <Faq />
       
-      {/* İLETİŞİM BÖLÜMÜ - MAVİ ARKA PLAN KALDIRILDI */}
-      <section className="bg-gray-50 py-24 border-t border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 text-center">
+      {/* İLETİŞİM BÖLÜMÜ - ARTIK TAMAMEN BEYAZ VE DARALTILDI */}
+      <section className="bg-white py-24 border-t border-gray-100">
+        <div className="max-w-2xl mx-auto px-4 text-center">
           
           <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 block">
             İletişim
@@ -31,12 +31,12 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-6">
             Size Nasıl Yardımcı Olabiliriz?
           </h2>
-          <p className="text-gray-500 mb-10 max-w-lg mx-auto">
+          <p className="text-gray-500 mb-10 mx-auto">
             Aklınıza takılan sorular veya mali danışmanlık talepleriniz için aşağıdaki formu doldurabilirsiniz.
           </p>
           
-          {/* Form Alanı (Sade Beyaz Kutu) */}
-          <div className="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100">
+          {/* Form Alanı */}
+          <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-left">
             <Contact />
           </div>
 
