@@ -1,46 +1,65 @@
-"use client";
 import Link from "next/link";
-import { servicesData } from "@/data/servicesData"; // Veriyi buradan alıyoruz
+import { services } from "@/data/servicesData"; // Veriyi doğru import ediyoruz
+import { ArrowRight, CheckCircle2 } from "lucide-react";
 
 export default function Services() {
   return (
-    <section className="py-24 bg-gray-50" id="uzmanliklar"> {/* Arka plan açık gri */}
+    <section id="hizmetler" className="py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="text-center mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-2 block">
-            Çözüm Alanlarımız
+        {/* Başlık Alanı */}
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 block">
+            HİZMETLERİMİZ
           </span>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-6">
-            Profesyonel Mali Hizmetler
+          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-4">
+            İşletmeniz İçin <span className="text-primary">En İyi Çözüm</span>
           </h2>
-          <div className="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+          <p className="text-gray-500">
+            Şahıs firmanıza, şirket ihtiyaçlarına ve büyüklüğüne özel hizmetler sunuyoruz.
+          </p>
         </div>
 
+        {/* Kartlar - Grid Yapısı (4 Sütun) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {servicesData.map((service, index) => (
-            <Link 
-              href={`/uzmanliklar/${service.slug}`}
+          {services.map((service, index) => (
+            <div 
               key={index} 
-              className="group p-8 bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:shadow-blue-900/10 rounded-sm transition-all duration-300 hover:-translate-y-2 flex flex-col items-start"
+              className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
             >
-              {/* İkon Kutusu */}
-              <div className="w-14 h-14 bg-blue-50 text-primary flex items-center justify-center rounded-sm mb-6 group-hover:bg-primary group-hover:text-white transition-colors duration-300">
+              {/* İkon */}
+              <div className="mb-6 p-4 bg-gray-50 rounded-full group-hover:bg-primary/10 transition-colors">
                 {service.icon}
               </div>
-              
-              <h3 className="text-xl font-playfair font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
+
+              {/* Başlık */}
+              <h3 className="text-xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
                 {service.title}
               </h3>
-              
-              <p className="text-secondary-light leading-relaxed text-sm mb-6 line-clamp-3">
-                {service.shortDesc}
+
+              {/* Açıklama */}
+              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+                {service.description}
               </p>
-              
-              <div className="mt-auto text-primary text-xs font-bold uppercase tracking-widest flex items-center gap-2 opacity-80 group-hover:opacity-100">
-                İncele <span className="text-lg leading-none">&rarr;</span>
-              </div>
-            </Link>
+
+              {/* Alt Özellikler Listesi */}
+              <ul className="text-left w-full space-y-3 mb-8">
+                {service.features.map((feature, i) => (
+                  <li key={i} className="flex items-center text-sm text-gray-500">
+                    <CheckCircle2 size={16} className="text-primary mr-2 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Buton (Süs amaçlı, tıklanınca iletişime gider) */}
+              <Link 
+                href="/iletisim" 
+                className="mt-auto inline-flex items-center text-primary font-bold text-sm hover:underline"
+              >
+                Detaylı Bilgi <ArrowRight size={16} className="ml-1" />
+              </Link>
+            </div>
           ))}
         </div>
 

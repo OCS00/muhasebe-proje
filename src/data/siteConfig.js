@@ -1,21 +1,19 @@
-import { Calculator, PieChart, TrendingUp, ShieldCheck } from "lucide-react";
-
 export const siteConfig = {
-  name: "Yavuz Şahin",
-  title: "Serbest Muhasebeci Mali Müşavir",
-  description: "Şirket kuruluşu, vergi danışmanlığı ve finansal süreçlerinizde güvenilir çözüm ortağınız.",
-  phone: "+90 555 123 45 67",
-  email: "info@yavuzsahin.com",
-  address: "Örnek Mah. Cumhuriyet Cad. No:10 Şişli/İstanbul",
+  name: "Yavuz Şahin", // Veya "Şahin Mali Müşavirlik"
+  title: "Mali Müşavirlik & Danışmanlık",
+  description: "Şirket kuruluşu, muhasebe, vergi danışmanlığı ve SGK teşvik süreçlerinde güvenilir çözüm ortağınız.",
+  url: "", // Varsa alan adın, yoksa boş kalsın
   
-  sheetDbUrl: "https://sheetdb.io/api/v1/BURAYA_YENI_KOD_GELECEK", 
-  
-  themeColor: "#1e40af",
+  // İLETİŞİM BİLGİLERİ (Buraları kesin doldur)
+  phone: "+90 555 123 45 67", // Gerçek numaranı yaz
+  email: "smmmyavuzsahin@hotmail.com", // Gerçek mailini yaz
+  address: "İHSANİYE MAH. BAHÇELER CAD NO:22 OFİS ROYAL İŞ MERKEZİ KAT:10/122 AKDENİZ / MERSİN", // Gerçek ofis adresin
+  mapUrl: "https://maps.app.goo.gl/Dkr3p8rTUvTUpmqh7", // Google Haritalar linkin (Varsa)
 
-  // EKSİK OLAN KISIM BURASIYDI 👇
+  // SOSYAL MEDYA (Varsa linkleri yapıştır, yoksa boş bırak)
   social: {
-    linkedin: "https://linkedin.com",
-    twitter: "https://twitter.com",
-    instagram: "https://instagram.com",
+    instagram: "https://instagram.com/",
+    linkedin: "https://linkedin.com/",
+    facebook: "https://facebook.com/",
   }
 };

@@ -8,6 +8,7 @@ import HomeBlog from "@/components/HomeBlog";
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import UsefulLinks from "@/components/UsefulLinks"; // 🔥 YENİ
 
 export default function Home() {
   return (
@@ -16,15 +17,20 @@ export default function Home() {
       <Hero />
       <Stats />
       <About />
+      
+      {/* 1. Hizmetler Bölümü (Artık hata vermeyecek) */}
       <Services />
+      
+      {/* 2. Faydalı Linkler (Hizmetlerin hemen altına koydum) */}
+      <UsefulLinks /> 
+      
       <Process />
       <HomeBlog />
       <Faq />
       
-      {/* İLETİŞİM BÖLÜMÜ - ARTIK TAMAMEN BEYAZ VE DARALTILDI */}
+      {/* İLETİŞİM BÖLÜMÜ */}
       <section className="bg-white py-24 border-t border-gray-100">
         <div className="max-w-2xl mx-auto px-4 text-center">
-          
           <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 block">
             İletişim
           </span>
@@ -34,12 +40,9 @@ export default function Home() {
           <p className="text-gray-500 mb-10 mx-auto">
             Aklınıza takılan sorular veya mali danışmanlık talepleriniz için aşağıdaki formu doldurabilirsiniz.
           </p>
-          
-          {/* Form Alanı */}
           <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 text-left">
             <Contact />
           </div>
-
         </div>
       </section>
 

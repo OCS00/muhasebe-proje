@@ -1,80 +1,89 @@
-"use client";
 import Link from "next/link";
-import Image from "next/image"; // Resim için bunu ekledik
+import Image from "next/image";
 import { siteConfig } from "@/data/siteConfig";
-import { Linkedin, Instagram, Phone, Mail, MapPin } from "lucide-react";
+import { services } from "@/data/servicesData"; // 🔥 Hizmetleri buradan çekiyoruz
+import { Linkedin, Instagram, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-primary text-gray-300 pt-16 pb-8 border-t border-blue-900">
+    <footer className="bg-blue-900 text-white pt-16 pb-8 border-t border-blue-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           
-          {/* 1. KOLON - LOGO VE AÇIKLAMA BURADA */}
-          <div className="col-span-1">
-            {/* LOGO VE İSİM */}
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="relative h-10 w-10">
+          {/* 1. KOLON - LOGO VE AÇIKLAMA */}
+          <div className="col-span-1 space-y-6">
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative h-12 w-12 flex-shrink-0">
+                {/* Logo resmini buraya koyuyoruz */}
                 <Image 
                   src="/smmm-logo.png" 
-                  alt="SMMM Logosu"
+                  alt={`${siteConfig.name} Logo`}
                   fill
                   className="object-contain"
                 />
               </div>
-               <span className="text-xl font-bold text-white tracking-tight">
-                SMMM {siteConfig.name}
-              </span>
+              <div className="flex flex-col">
+               <span className="text-lg font-bold text-white leading-none">
+                {siteConfig.name}
+               </span>
+               <span className="text-[10px] uppercase tracking-widest text-blue-300 mt-1">
+                 Mali Müşavirlik
+               </span>
+              </div>
             </Link>
             
-            <p className="text-sm leading-relaxed text-blue-100/80 mb-6">
+            <p className="text-sm leading-relaxed text-blue-200 mb-6">
               {siteConfig.description}
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="text-white/70 hover:text-white transition-colors"><Linkedin size={20} /></a>
-              <a href="#" className="text-white/70 hover:text-white transition-colors"><Instagram size={20} /></a>
-            </div>
+            
+            {/* Sosyal Medya */}
+            
           </div>
 
-          {/* 2. KOLON */}
+          {/* 2. KOLON - HIZLI MENÜ */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Hızlı Menü</h4>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-blue-800 pb-2 inline-block">Hızlı Menü</h4>
             <ul className="space-y-3 text-sm">
-              <li><Link href="/" className="hover:text-white text-blue-100/70 transition-colors">Ana Sayfa</Link></li>
-              <li><Link href="#hakkimda" className="hover:text-white text-blue-100/70 transition-colors">Hakkımızda</Link></li>
-              <li><Link href="#hizmetler" className="hover:text-white text-blue-100/70 transition-colors">Hizmetler</Link></li>
-              <li><Link href="#iletisim" className="hover:text-white text-blue-100/70 transition-colors">İletişim</Link></li>
+              <li><Link href="/" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2"><ArrowRight size={12} className="opacity-50"/> Ana Sayfa</Link></li>
+              <li><Link href="/hakkimda" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2"><ArrowRight size={12} className="opacity-50"/> Hakkımızda</Link></li>
+              <li><Link href="/hizmetler" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2"><ArrowRight size={12} className="opacity-50"/> Hizmetler</Link></li>
+              <li><Link href="/blog" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2"><ArrowRight size={12} className="opacity-50"/> Bilgi Bankası</Link></li>
+              <li><Link href="/iletisim" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2"><ArrowRight size={12} className="opacity-50"/> İletişim</Link></li>
             </ul>
           </div>
 
-          {/* 3. KOLON */}
+          {/* 3. KOLON - HİZMETLER (DİNAMİK ÇEKİLİYOR) */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Hizmetler</h4>
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-blue-800 pb-2 inline-block">Hizmet Alanlarımız</h4>
             <ul className="space-y-3 text-sm">
-              <li><span className="text-blue-100/70">Şirket Kuruluşu</span></li>
-              <li><span className="text-blue-100/70">Vergi Danışmanlığı</span></li>
-              <li><span className="text-blue-100/70">SGK ve Bordro</span></li>
-              <li><span className="text-blue-100/70">E-Dönüşüm</span></li>
+              {/* Gerçek hizmet verilerini buraya döngü ile koyuyoruz */}
+              {services.slice(0, 5).map((service) => (
+                <li key={service.id}>
+                  <Link href="/hizmetler" className="hover:text-white hover:pl-2 text-blue-200 transition-all flex items-center gap-2">
+                    <ArrowRight size={12} className="opacity-50"/> {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* 4. KOLON */}
+          {/* 4. KOLON - İLETİŞİM */}
           <div>
-            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">İletişim</h4>
-            <ul className="space-y-4 text-sm text-blue-100/70">
+            <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6 border-b border-blue-800 pb-2 inline-block">İletişim</h4>
+            <ul className="space-y-4 text-sm text-blue-200">
               <li className="flex items-start gap-3">
-                <MapPin size={18} className="mt-0.5 text-blue-300" />
-                <span>{siteConfig.address}</span>
+                <MapPin size={20} className="mt-0.5 text-blue-400 shrink-0" />
+                <span className="leading-relaxed">{siteConfig.address}</span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone size={18} className="text-blue-300" />
-                <span>{siteConfig.phone}</span>
+                <Phone size={20} className="text-blue-400 shrink-0" />
+                <a href={`tel:${siteConfig.phone}`} className="hover:text-white transition-colors">{siteConfig.phone}</a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail size={18} className="text-blue-300" />
-                <span>{siteConfig.email}</span>
+                <Mail size={20} className="text-blue-400 shrink-0" />
+                <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">{siteConfig.email}</a>
               </li>
             </ul>
           </div>
@@ -82,9 +91,9 @@ export default function Footer() {
         </div>
 
         {/* ALT ÇİZGİ */}
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-blue-100/60">
+        <div className="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-blue-300">
           <p>&copy; {currentYear} {siteConfig.name}. Tüm hakları saklıdır.</p>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 opacity-80 hover:opacity-100 transition-opacity">
             <span>Designed by</span>
             <span className="font-bold text-white">OCS Creative</span>
           </div>

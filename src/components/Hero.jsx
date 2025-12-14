@@ -16,14 +16,14 @@ export default function Hero() {
               {siteConfig.title}
             </div>
 
-            <h1 className="text-4xl lg:text-6xl font-extrabold text-secondary leading-tight">
-              İşletmeniz İçin <br />
-              <span className="text-primary">Güçlü Finansal</span> Gelecek.
+            <h1 className="text-4xl md:text-6xl font-bold font-playfair text-secondary mb-6 leading-tight">
+                İşletmenizin Geleceğini <br />
+                <span className="text-primary">Güvenle İnşa Edin</span>
             </h1>
             
-            <p className="text-lg text-secondary-light leading-relaxed max-w-lg">
-              Karmaşık vergi süreçlerini, bordrolama işlemlerini ve şirket kuruluşunu bize bırakın. 
-              Siz sadece işinizi büyütmeye odaklanın.
+            <p className="text-gray-500 text-lg md:text-xl mb-8 max-w-2xl mx-auto leading-relaxed">
+               Vergi mevzuatının karmaşasında kaybolmayın. Şirket kuruluşu, finansal raporlama ve stratejik vergi planlamasında 
+               yanınızdayız.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4">
