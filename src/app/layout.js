@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { siteConfig } from "@/data/siteConfig";
 import WhatsAppBtn from "@/components/WhatsAppBtn"; 
 import CookieConsent from "@/components/CookieConsent"; // 🔥 1. IMPORT ET
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         {children}
         <WhatsAppBtn />
         <CookieConsent /> {/* 🔥 2. BURAYA EKLE (WhatsApp'ın altına) */}
+        <Analytics />
       </body>
     </html>
   );
