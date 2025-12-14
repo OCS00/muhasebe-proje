@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import { siteConfig } from "@/data/siteConfig";
 import WhatsAppBtn from "@/components/WhatsAppBtn"; 
 import CookieConsent from "@/components/CookieConsent"; // 🔥 1. IMPORT ET
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin", "latin-ext"], variable: "--font-inter" });
 const playfair = Playfair_Display({ subsets: ["latin", "latin-ext"], variable: "--font-playfair", display: 'swap' });
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
         {children}
         <WhatsAppBtn />
         <CookieConsent /> {/* 🔥 2. BURAYA EKLE (WhatsApp'ın altına) */}
+        <SpeedInsights />
       </body>
     </html>
   );
