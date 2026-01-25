@@ -1,91 +1,195 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { siteConfig } from "@/data/siteConfig";
-import { services } from "@/data/servicesData";
 import { 
-  Facebook, Twitter, Instagram, Linkedin, 
-  MapPin, Phone, Mail, ArrowRight, ShieldCheck, 
-  FileText, ExternalLink 
+  Facebook, 
+  Twitter, 
+  Linkedin, 
+  Instagram, 
+  Mail, 
+  MapPin, 
+  Phone, 
+  ArrowRight, 
+  ShieldCheck, 
+  Send,
+  CheckCircle2,
+  Loader2,
+  ExternalLink
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  
+  // --- STATE YÖNETİMİ (Bülten Aboneliği İçin) ---
+  const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle"); // 'idle' | 'loading' | 'success' | 'error'
 
-  // Sosyal Medya Verileri (Daha yönetilebilir)
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+
+    setStatus("loading");
+
+    // Simüle edilmiş API isteği (Gerçek projede burası backend'e gider)
+    setTimeout(() => {
+      setStatus("success");
+      setEmail("");
+      // 3 saniye sonra butonu eski haline getir
+      setTimeout(() => setStatus("idle"), 3000);
+    }, 1500);
+  };
+
+  // --- LİNK VERİLERİ (Kolay Yönetim İçin) ---
+  const quickLinks = [
+    { label: "Ana Sayfa", url: "/" },
+    { label: "Hakkımızda", url: "/hakkimda" },
+    { label: "Ekibimiz & Kariyer", url: "/hakkimda" },
+    { label: "Blog & Mevzuat", url: "/blog" },
+    { label: "İletişim", url: "/iletisim" },
+  ];
+
+  const serviceLinks = [
+    { label: "Şirket Kuruluş İşlemleri", url: "/hizmetler" },
+    { label: "Vergi & KDV Danışmanlığı", url: "/hizmetler" },
+    { label: "Bordrolama & SGK", url: "/hizmetler" },
+    { label: "Finansal Raporlama", url: "/hizmetler" },
+    { label: "E-Dönüşüm Hizmetleri", url: "/hizmetler" },
+  ];
+
   const socialLinks = [
-    { icon: <Facebook size={20} />, href: "#", label: "Facebook" },
-    { icon: <Twitter size={20} />, href: "#", label: "Twitter" },
-    { icon: <Instagram size={20} />, href: "#", label: "Instagram" },
-    { icon: <Linkedin size={20} />, href: "#", label: "LinkedIn" },
+    { icon: Facebook, href: "#", label: "Facebook" },
+    { icon: Twitter, href: "#", label: "Twitter" },
+    { icon: Linkedin, href: "#", label: "LinkedIn" },
+    { icon: Instagram, href: "#", label: "Instagram" },
   ];
 
   return (
-    <footer className="bg-[#0f172a] text-white pt-20 pb-10 border-t border-slate-800 relative overflow-hidden">
+    <footer className="bg-[#050b14] text-slate-300 pt-24 pb-10 border-t border-slate-900 relative overflow-hidden font-sans">
       
-      {/* Arka Plan Dekoru */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+      {/* --- ARKA PLAN LOGOSU (SMMM WATERMARK) --- */}
+      {/* Bu kısım logoyu arka plana devasa ve silik basar */}
+      <div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none overflow-hidden">
+         <motion.div 
+           initial={{ opacity: 0 }}
+           whileInView={{ opacity: 0.03 }} // %3 Görünürlük (Çok Silik)
+           transition={{ duration: 1.5 }}
+           className="relative w-[120%] h-[120%] md:w-[800px] md:h-[800px]"
+         >
+            <Image 
+              src="/smmm-logo.png" 
+              alt="Background Watermark" 
+              fill 
+              className="object-contain rotate-12 grayscale"
+            />
+         </motion.div>
+      </div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         
-        {/* ÜST KISIM: Marka ve Bülten */}
-        <div className="grid lg:grid-cols-2 gap-12 border-b border-slate-800 pb-16 mb-16">
-          <div className="space-y-6">
-            <Link href="/" className="inline-block">
-              <h2 className="text-3xl font-black tracking-tight font-sans">
-                SMMM<span className="text-blue-500">.</span>
+        {/* --- ÜST KISIM: MARKA & BÜLTEN --- */}
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 border-b border-slate-800/60 pb-16 mb-16">
+          
+          {/* Marka ve Açıklama */}
+          <div className="space-y-8">
+            <Link href="/" className="inline-block group">
+              <h2 className="text-3xl md:text-4xl font-black tracking-tight text-white group-hover:text-blue-500 transition-colors">
+                {siteConfig.name}
               </h2>
+              <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-blue-600 block mt-1">
+                MALİ MÜŞAVİRLİK
+              </span>
             </Link>
+            
             <p className="text-slate-400 text-lg leading-relaxed max-w-md">
-              İşletmenizin finansal sağlığı için modern çözümler, güvenilir denetim ve stratejik danışmanlık hizmetleri sunuyoruz.
+              Mali süreçlerinizi güvenle yönetiyor, işletmenizin geleceğini sağlam temellere oturtuyoruz. 
+              Modern, şeffaf ve dijital çözüm ortağınız.
             </p>
-            <div className="flex gap-4 pt-2">
+
+            <div className="flex gap-4">
               {socialLinks.map((social, idx) => (
-                <Link 
+                <a 
                   key={idx} 
-                  href={social.href}
-                  className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:-translate-y-1"
+                  href={social.href} 
                   aria-label={social.label}
+                  className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:-translate-y-1 transition-all duration-300"
                 >
-                  {social.icon}
-                </Link>
+                  <social.icon size={20} />
+                </a>
               ))}
             </div>
           </div>
 
-          {/* Bülten Alanı */}
-          <div className="bg-slate-800/50 p-8 rounded-2xl border border-slate-700">
-            <h3 className="text-xl font-bold mb-2">Güncel Mevzuattan Haberdar Olun</h3>
-            <p className="text-slate-400 mb-6 text-sm">Önemli vergi değişiklikleri ve duyurular için bültenimize abone olun.</p>
-            <form className="flex flex-col sm:flex-row gap-3">
-              <input 
-                type="email" 
-                placeholder="E-posta adresiniz" 
-                className="flex-1 bg-slate-900 border border-slate-700 rounded-xl px-5 py-3 text-white placeholder:text-slate-500 focus:outline-none focus:border-blue-500 transition-colors"
-              />
-              <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-xl transition-colors shadow-lg shadow-blue-600/20">
-                Abone Ol
+          {/* Gelişmiş Bülten Formu */}
+          <div className="bg-slate-900/40 p-8 rounded-[2rem] border border-slate-800 backdrop-blur-sm relative group overflow-hidden">
+            {/* Form Arka Plan Efekti */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -z-10 group-hover:bg-blue-500/20 transition-all duration-500"></div>
+            
+            <h3 className="text-xl font-bold text-white mb-3 flex items-center gap-3">
+              <div className="p-2 bg-blue-500/10 rounded-lg text-blue-500">
+                <Send size={20} />
+              </div>
+              Mevzuat Bülteni
+            </h3>
+            <p className="text-slate-400 mb-8 text-sm leading-relaxed">
+              Vergi dünyasındaki kritik değişiklikleri, teşvik haberlerini ve önemli hatırlatmaları e-posta kutunuza gönderiyoruz. Spam yok, sadece bilgi.
+            </p>
+
+            <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+                <input 
+                  type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="E-posta adresiniz" 
+                  disabled={status === "loading" || status === "success"}
+                  className="w-full bg-slate-950 border border-slate-700 rounded-xl pl-12 pr-5 py-4 text-white placeholder:text-slate-600 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500/50 transition-all disabled:opacity-50"
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={status === "loading" || status === "success"}
+                className={`px-8 py-4 rounded-xl font-bold transition-all shadow-lg flex items-center justify-center gap-2 min-w-[140px] ${
+                  status === "success" 
+                    ? "bg-green-600 text-white shadow-green-900/20" 
+                    : "bg-blue-600 hover:bg-blue-500 text-white shadow-blue-900/20 hover:shadow-blue-600/30"
+                }`}
+              >
+                {status === "loading" ? (
+                  <Loader2 className="animate-spin" size={20} />
+                ) : status === "success" ? (
+                  <>Abone Olundu <CheckCircle2 size={18} /></>
+                ) : (
+                  "Kayıt Ol"
+                )}
               </button>
             </form>
+            <div className="mt-4 flex items-center gap-2 text-[11px] text-slate-500 font-medium">
+              <ShieldCheck size={12} className="text-emerald-500" />
+              KVKK kapsamında verileriniz güvendedir.
+            </div>
           </div>
         </div>
 
-        {/* ORTA KISIM: Linkler */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        {/* --- ORTA KISIM: SİTE HARİTASI --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
           
-          {/* Sütun 1: Hızlı Erişim */}
+          {/* Sütun 1: Kurumsal */}
           <div>
-            <h4 className="font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+            <h4 className="font-bold text-white mb-8 text-lg flex items-center gap-2">
+              <span className="w-1 h-6 bg-blue-600 rounded-full"></span>
               Kurumsal
             </h4>
             <ul className="space-y-4">
-              {["Ana Sayfa", "Hakkımızda", "Ekibimiz", "Kariyer", "İletişim"].map((item) => (
-                <li key={item}>
-                  <Link href="#" className="text-slate-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2 text-sm">
-                    <ArrowRight size={14} className="opacity-0 hover:opacity-100" />
-                    {item}
+              {quickLinks.map((item, idx) => (
+                <li key={idx}>
+                  <Link href={item.url} className="text-slate-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-3 text-sm group">
+                    <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-500 transition-colors"></span>
+                    {item.label}
                   </Link>
                 </li>
               ))}
@@ -94,60 +198,76 @@ export default function Footer() {
 
           {/* Sütun 2: Hizmetler */}
           <div>
-            <h4 className="font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+            <h4 className="font-bold text-white mb-8 text-lg flex items-center gap-2">
+              <span className="w-1 h-6 bg-blue-600 rounded-full"></span>
               Hizmetlerimiz
             </h4>
             <ul className="space-y-4">
-              {services.slice(0, 5).map((service, idx) => (
+              {serviceLinks.map((item, idx) => (
                 <li key={idx}>
-                  <Link href="/hizmetler" className="text-slate-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2 text-sm">
-                    <ArrowRight size={14} className="opacity-0 hover:opacity-100" />
-                    {service.title}
+                  <Link href={item.url} className="text-slate-400 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-3 text-sm group">
+                     <span className="w-1.5 h-1.5 rounded-full bg-slate-700 group-hover:bg-blue-500 transition-colors"></span>
+                    {item.label}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Sütun 3: İletişim */}
+          {/* Sütun 3 & 4: İletişim Detayları */}
           <div className="lg:col-span-2">
-             <h4 className="font-bold text-white mb-6 flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+             <h4 className="font-bold text-white mb-8 text-lg flex items-center gap-2">
+              <span className="w-1 h-6 bg-blue-600 rounded-full"></span>
               İletişim Bilgileri
             </h4>
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 group hover:border-blue-500/50 transition-colors">
-                <MapPin className="text-blue-500 mb-3 group-hover:scale-110 transition-transform" />
-                <h5 className="font-bold text-white mb-1">Ofis Adresi</h5>
-                <p className="text-slate-400 text-sm leading-relaxed">{siteConfig.address}</p>
-              </div>
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 group hover:border-blue-500/50 transition-colors">
-                <Phone className="text-blue-500 mb-3 group-hover:scale-110 transition-transform" />
-                <h5 className="font-bold text-white mb-1">Telefon</h5>
-                <a href={`tel:${siteConfig.phone}`} className="text-slate-400 text-sm hover:text-white transition-colors">{siteConfig.phone}</a>
-                <p className="text-xs text-slate-500 mt-1">Hafta içi: 09:00 - 18:00</p>
-              </div>
-              <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 group hover:border-blue-500/50 transition-colors sm:col-span-2">
-                <Mail className="text-blue-500 mb-3 group-hover:scale-110 transition-transform" />
-                <h5 className="font-bold text-white mb-1">E-Posta</h5>
-                <a href={`mailto:${siteConfig.email}`} className="text-slate-400 text-sm hover:text-white transition-colors">{siteConfig.email}</a>
-              </div>
-            </div>
+             <div className="grid sm:grid-cols-2 gap-6">
+                
+                {/* Adres Kartı */}
+                <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900 transition-all group">
+                  <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform">
+                    <MapPin size={20} />
+                  </div>
+                  <h5 className="font-bold text-white mb-2 text-sm uppercase tracking-wider">Merkez Ofis</h5>
+                  <p className="text-slate-400 text-sm leading-relaxed">{siteConfig.address}</p>
+                </div>
+
+                {/* Telefon Kartı */}
+                <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900 transition-all group">
+                  <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-blue-500 mb-4 group-hover:scale-110 transition-transform">
+                    <Phone size={20} />
+                  </div>
+                  <h5 className="font-bold text-white mb-2 text-sm uppercase tracking-wider">Telefon</h5>
+                  <p className="text-white text-lg font-mono mb-1">{siteConfig.phone}</p>
+                  <p className="text-slate-500 text-xs">Hafta içi: 09:00 - 18:00</p>
+                </div>
+
+                {/* Mail Kartı (Geniş) */}
+                <div className="bg-slate-900/50 p-6 rounded-2xl border border-slate-800 hover:border-blue-500/50 hover:bg-slate-900 transition-all group sm:col-span-2 flex items-center justify-between">
+                  <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 bg-slate-800 rounded-lg flex items-center justify-center text-blue-500 group-hover:scale-110 transition-transform">
+                        <Mail size={20} />
+                     </div>
+                     <div>
+                       <h5 className="font-bold text-white text-sm uppercase tracking-wider">E-Posta</h5>
+                       <a href={`mailto:${siteConfig.email}`} className="text-slate-400 hover:text-white transition-colors text-sm">{siteConfig.email}</a>
+                     </div>
+                  </div>
+                  <ExternalLink size={18} className="text-slate-600 group-hover:text-blue-500 transition-colors" />
+                </div>
+
+             </div>
           </div>
 
         </div>
 
-        {/* ALT KISIM: Copyright ve Yasal */}
-        <div className="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-slate-500">
-          <p>© {currentYear} {siteConfig.name} - Tüm Hakları Saklıdır.</p>
-          <div className="flex gap-6">
-            <Link href="#" className="hover:text-white flex items-center gap-1"><ShieldCheck size={14}/> Gizlilik Politikası</Link>
-            <Link href="#" className="hover:text-white flex items-center gap-1"><FileText size={14}/> KVKK Metni</Link>
-          </div>
-          <p className="flex items-center gap-1">
-            Design by <span className="text-white font-bold">OCS Creative</span>
-            <ExternalLink size={12} />
+        {/* --- ALT KISIM: COPYRIGHT --- */}
+        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6 text-xs font-medium text-slate-500">
+          <p>© {currentYear} {siteConfig.name}. Tüm yasal hakları saklıdır.</p>
+          
+    
+          
+          <p className="flex items-center gap-1 opacity-60 hover:opacity-100 transition-opacity">
+            Designed by <span className="text-slate-300 font-bold">OCS Creative</span>
           </p>
         </div>
 

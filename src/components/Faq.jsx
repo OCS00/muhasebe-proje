@@ -1,105 +1,139 @@
 "use client";
-import { useState } from "react";
-import { Plus, Minus, HelpCircle, Phone } from "lucide-react";
-import VatCalculator from "@/components/VatCalculator"; 
+
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Plus, Minus, Search, MessageCircle } from "lucide-react";
+
+const allFaqs = [
+  {
+    category: "Kuruluş",
+    q: "Şirket kuruluşu için hangi belgeler gerekli?",
+    a: "Şirket türüne (Limited, A.Ş., Şahıs) göre değişmekle birlikte; kimlik fotokopisi, ikametgah, kira kontratı ve imza beyannamesi temel evraklardır. Detaylı liste için ofisimizle iletişime geçebilirsiniz."
+  },
+  {
+    category: "Genel",
+    q: "Şahıs şirketi mi Limited şirket mi kurmalıyım?",
+    a: "Cironuz, iş modeliniz ve ortaklık yapınız belirleyicidir. Yıllık cironuz belirli bir limitin altındaysa ve tek başınaysanız Şahıs şirketi vergi avantajı sağlar. Ancak kurumsallık ve prestij için Limited şirket önerilir."
+  },
+  {
+    category: "Vergi",
+    q: "Genç Girişimci desteğinden kimler yararlanabilir?",
+    a: "18-29 yaş arası, ilk defa mükellefiyet açan girişimciler; 3 yıl boyunca yıllık 150.000 TL'ye kadar gelir vergisinden muaf tutulur ve 1 yıl boyunca Bağ-Kur primleri devlet tarafından ödenir."
+  },
+  {
+    category: "E-Dönüşüm",
+    q: "E-Fatura kullanmak zorunlu mu?",
+    a: "2023 yılı brüt satış hasılatı 3 Milyon TL ve üzeri olan mükellefler için zorunludur. Ayrıca e-ticaret yapanlar için limitler daha düşüktür."
+  },
+  {
+    category: "Maliyet",
+    q: "Aylık muhasebe ücretleri neye göre belirleniyor?",
+    a: "İşlem hacminiz, çalışan sayınız, fatura adediniz ve faaliyet gösterdiğiniz sektöre göre Mali Müşavirler Odası'nın belirlediği asgari tarife üzerinden hesaplanır."
+  }
+];
 
 export default function Faq() {
   const [openIndex, setOpenIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
 
-  // VERİYİ DİREKT BURAYA YAZIYORUZ (HATA RİSKİ YOK)
-  const sorular = [
-    {
-      question: "Şirket kurmak ne kadar sürer?",
-      answer: "Gerekli evraklar (imza beyannamesi, kira kontratı vb.) tamamlandığında, şahıs şirketleri aynı gün, Limited ve Anonim şirketler ortalama 2-3 iş günü içinde kurulur."
-    },
-    {
-      question: "Home-ofis şahıs şirketi kurabilir miyim?",
-      answer: "Evet, kurabilirsiniz. Evinizin bir odasını ofis olarak göstererek kira stopaj avantajından yararlanabilir ve şahıs firmanızı yasal olarak faaliyete geçirebilirsiniz."
-    },
-    {
-      question: "Hiç fatura kesmesem de vergi öder miyim?",
-      answer: "Evet. Hiç satış yapmasanız bile her ay sabit Damga Vergisi (KDV ve Muhtasar beyannameleri için) ödenmesi gerekmektedir. Bu tutar her yıl yeniden belirlenir."
-    },
-    {
-      question: "Genç Girişimci Desteği nedir?",
-      answer: "18-29 yaş arası girişimciler için 3 yıl boyunca kazancın belirli bir kısmına gelir vergisi muafiyeti ve 1 yıl boyunca Bağ-Kur primlerinin devlet tarafından ödenmesi desteğidir."
-    },
-    {
-      question: "E-Fatura'ya geçmek zorunlu mu?",
-      answer: "Yıllık cirosu belirli bir limiti aşan işletmeler ve e-ticaret yapanlar için zorunludur. Ancak ciro şartı aranmaksızın isteğe bağlı olarak da geçiş yapılabilir."
-    }
-  ];
+  // Arama Filtresi
+  const filteredFaqs = allFaqs.filter(item => 
+    item.q.toLowerCase().includes(searchTerm.toLowerCase()) || 
+    item.a.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
-    <section id="sss" className="py-24 bg-white border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 flex items-center justify-center gap-2">
-            <HelpCircle size={16} /> Destek Merkezi
-          </span>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary">
-            Sıkça Sorulan <span className="text-primary">Sorular</span>
-          </h2>
-          <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
-            Aklınıza takılan soruların cevaplarını burada bulabilir veya yandaki araçla KDV hesaplaması yapabilirsiniz.
-          </p>
+    <div className="flex flex-col gap-8">
+      
+      {/* --- ARAMA KUTUSU --- */}
+      <div className="relative">
+        <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
+          <Search className="text-slate-500" size={20} />
         </div>
-
-        {/* İKİLİ KOLON YAPISI */}
-        <div className="grid lg:grid-cols-3 gap-12 items-start">
-          
-          {/* SOL: SORULAR LİSTESİ */}
-          <div className="lg:col-span-2 space-y-4">
-            {sorular.map((item, index) => (
-              <div 
-                key={index} 
-                className={`border rounded-xl transition-all duration-300 overflow-hidden ${
-                  openIndex === index 
-                    ? "bg-white border-blue-900 shadow-lg ring-1 ring-blue-900/20" 
-                    : "bg-gray-50 border-gray-100 hover:border-gray-300"
-                }`}
-              >
-                <button
-                  onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                  className="w-full flex justify-between items-center p-6 text-left"
-                >
-                  <span className={`font-bold text-lg ${openIndex === index ? "text-blue-900" : "text-gray-800"}`}>
-                    {item.question}
-                  </span>
-                  {openIndex === index ? (
-                    <div className="bg-blue-900 text-white p-1 rounded-full"><Minus size={16} /></div>
-                  ) : (
-                    <div className="bg-gray-200 text-gray-500 p-1 rounded-full"><Plus size={16} /></div>
-                  )}
-                </button>
-                
-                <div 
-                  className={`transition-all duration-300 ease-in-out ${
-                    openIndex === index ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-                  }`}
-                >
-                  <div className="p-6 pt-0 text-gray-500 leading-relaxed border-t border-gray-100/50 mt-2">
-                    {item.answer}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* SAĞ: HESAP MAKİNESİ */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24"> 
-              <VatCalculator />
-              
-              {/* İletişim Kutusu */}
-              
-            </div>
-          </div>
-
-        </div>
-
+        <input 
+          type="text" 
+          placeholder="Sorunuzu arayın (örn: şirket kuruluşu, vergi...)" 
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full bg-slate-950/50 border border-slate-700 text-white rounded-2xl py-4 pl-12 pr-4 focus:outline-none focus:border-blue-500 focus:bg-slate-900 transition-all placeholder:text-slate-600"
+        />
       </div>
-    </section>
+
+      {/* --- SORU LİSTESİ --- */}
+      <div className="space-y-4">
+        {filteredFaqs.length > 0 ? (
+          filteredFaqs.map((item, index) => (
+            <motion.div 
+              key={index}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className={`rounded-2xl border transition-all duration-300 overflow-hidden ${
+                openIndex === index 
+                  ? "bg-slate-800 border-blue-500/50 shadow-lg shadow-blue-900/10" 
+                  : "bg-slate-800/20 border-slate-700/50 hover:bg-slate-800/40"
+              }`}
+            >
+              <button
+                onClick={() => setOpenIndex(index === openIndex ? null : index)}
+                className="w-full flex items-center justify-between p-6 text-left gap-4"
+              >
+                <div className="flex items-start gap-4">
+                  <span className={`mt-1 p-2 rounded-lg text-xs font-bold uppercase tracking-wider hidden sm:block ${
+                    openIndex === index ? "bg-blue-500/20 text-blue-400" : "bg-slate-700 text-slate-400"
+                  }`}>
+                    {item.category}
+                  </span>
+                  <span className={`font-bold text-lg leading-snug transition-colors ${
+                    openIndex === index ? "text-white" : "text-slate-300"
+                  }`}>
+                    {item.q}
+                  </span>
+                </div>
+                
+                <span className={`p-2 rounded-full transition-all shrink-0 ${
+                  openIndex === index ? "bg-blue-600 text-white rotate-180" : "bg-slate-700 text-slate-400"
+                }`}>
+                  {openIndex === index ? <Minus size={18} /> : <Plus size={18} />}
+                </span>
+              </button>
+              
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-6 pl-6 sm:pl-24 pr-8">
+                       <p className="text-slate-400 leading-relaxed border-l-2 border-slate-600 pl-4 py-1">
+                         {item.a}
+                       </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))
+        ) : (
+          <div className="text-center py-10 text-slate-500">
+            <MessageCircle size={48} className="mx-auto mb-4 opacity-20" />
+            <p>Aradığınız kriterde soru bulunamadı.</p>
+            <button onClick={() => setSearchTerm("")} className="text-blue-500 font-bold mt-2">Tümünü Göster</button>
+          </div>
+        )}
+      </div>
+
+      <div className="text-center mt-4">
+        <p className="text-slate-400 text-sm">
+          Aradığınız cevabı bulamadınız mı? 
+          <a href="/iletisim" className="text-blue-400 font-bold ml-1 hover:text-blue-300 hover:underline">
+            Bize Danışın
+          </a>
+        </p>
+      </div>
+
+    </div>
   );
 }

@@ -151,7 +151,7 @@ export default function Hero() {
                <div className="p-2 bg-green-100 rounded-lg text-green-600"><PieChart size={20}/></div>
                <div>
                  <div className="text-xs text-slate-400 font-bold">Vergi İadesi</div>
-                 <div className="text-lg font-black text-slate-800">%18</div>
+                 <div className="text-lg font-black text-slate-800">%20</div>
                </div>
              </div>
              <div className="h-1.5 w-full bg-slate-100 rounded-full overflow-hidden">

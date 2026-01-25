@@ -1,19 +1,18 @@
 export const siteConfig = {
-  name: "Yavuz Şahin", // Veya "Şahin Mali Müşavirlik"
+  name: "YAVUZ ŞAHİN",
   title: "Mali Müşavirlik & Danışmanlık",
-  description: "Şirket kuruluşu, muhasebe, vergi danışmanlığı ve SGK teşvik süreçlerinde güvenilir çözüm ortağınız.",
-  url: "", // Varsa alan adın, yoksa boş kalsın
+  description: "Mersin merkezli, vergi danışmanlığı, şirket kuruluşu ve finansal raporlama hizmetleri sunan profesyonel mali müşavirlik ofisi.",
+  url: "https://www.yavuzsahin.com", // Sitenin gerçek adresi olacak
   
-  // İLETİŞİM BİLGİLERİ (Buraları kesin doldur)
-  phone: "+90 555 123 45 67", // Gerçek numaranı yaz
-  email: "smmmyavuzsahin@hotmail.com", // Gerçek mailini yaz
-  address: "İHSANİYE MAH. BAHÇELER CAD NO:22 OFİS ROYAL İŞ MERKEZİ KAT:10/122 AKDENİZ / MERSİN", // Gerçek ofis adresin
-  mapUrl: "https://maps.app.goo.gl/Dkr3p8rTUvTUpmqh7", // Google Haritalar linkin (Varsa)
-
-  // SOSYAL MEDYA (Varsa linkleri yapıştır, yoksa boş bırak)
-  social: {
-    instagram: "https://instagram.com/",
-    linkedin: "https://linkedin.com/",
-    facebook: "https://facebook.com/",
+  // İletişim Bilgileri
+  email: "smmmyavuzsahin@hotmail.com",
+  phone: "+90 (555) 123 45 67",
+  address: "İHSANİYE MAH. BAHÇELER CAD NO:22 OFİS ROYAL İŞ MERKEZİ KAT:10/122 AKDENİZ / MERSİN" ,
+  
+  // Sosyal Medya (Varsa)
+  links: {
+    twitter: "https://twitter.com/yavuzsahin",
+    linkedin: "https://linkedin.com/in/yavuzsahin",
+    instagram: "https://instagram.com/yavuzsahin",
   }
 };

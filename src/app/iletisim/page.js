@@ -1,118 +1,138 @@
 "use client";
+
+import React from "react";
+import { motion } from "framer-motion";
+import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
+import Contact from "@/components/Contact";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Contact from "@/components/Contact"; 
-import { MapPin, Phone, Mail, Clock, ArrowDown } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
 
-export default function ContactPage() {
+export default function Iletisim() {
   return (
-    <main className="bg-white min-h-screen">
+    <div className="bg-white min-h-screen font-sans">
       <Navbar />
 
-      {/* 1. HERO BÖLÜMÜ: ARTIK KESİN MAVİ (bg-blue-900) */}
-      <section className="bg-blue-900 text-white py-24 pb-48 relative overflow-hidden">
-        {/* Arka plan süsü */}
-        <div className="absolute top-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl transform translate-x-1/2 translate-y-1/2"></div>
-        
-        <div className="max-w-7xl mx-auto px-4 relative z-10 text-center">
-          <span className="text-blue-200 font-bold tracking-widest uppercase text-xs mb-3 block">
-            BİZE ULAŞIN
-          </span>
-          <h1 className="text-4xl md:text-6xl font-playfair font-bold mb-6">
-            Bir Kahve İçmeye <br/> <span className="text-blue-200">Bekleriz</span>
+      {/* --- HERO --- */}
+      <section className="pt-48 pb-16 bg-[#0b1120] relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('/grid.svg')] opacity-10"></div>
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <h1 className="text-5xl md:text-6xl font-black text-white mb-6">
+            Bize Ulaşın
           </h1>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg mb-8 leading-relaxed">
-            Vergi sorularınız, şirket kuruluşu veya danışmanlık talepleriniz için kapımız her zaman açık.
+          <p className="text-xl text-slate-400 max-w-2xl">
+            Mersin'deki ofisimize kahve içmeye bekleriz. <br/>
+            Sorularınız için aşağıdaki kanallardan bize ulaşabilirsiniz.
           </p>
-          <ArrowDown className="mx-auto text-blue-200 animate-bounce mt-4" size={32} />
         </div>
       </section>
 
-      {/* 2. İLETİŞİM KARTLARI VE FORM */}
-      <section className="bg-gray-50 pb-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
           
-          {/* Kartlar */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16 -mt-32 relative z-20">
-            {/* Telefon */}
-            <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-blue-900 text-center group hover:-translate-y-2 transition-transform">
-              <div className="bg-blue-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-900 group-hover:bg-blue-900 group-hover:text-white transition-colors">
-                <Phone size={28} />
+          {/* --- SOL TARA: İLETİŞİM KARTLARI --- */}
+          <div className="space-y-12">
+            <div>
+              <span className="text-blue-600 font-bold uppercase tracking-widest text-sm mb-4 block">
+                İletişim Kanalları
+              </span>
+              <h2 className="text-3xl font-black text-slate-900 mb-8">
+                Yavuz Şahin <br/> Mali Müşavirlik Ofisi
+              </h2>
+              
+              <div className="space-y-6">
+                {/* Adres Kartı */}
+                <div className="flex items-start gap-6 p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-blue-300 transition-colors">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-blue-600 shadow-sm shrink-0">
+                    <MapPin size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">Ofis Adresi</h4>
+                    <p className="text-slate-500 leading-relaxed">
+                      {/* Burayı Mersin Adresi Olarak Güncelledik */}
+                      İHSANİYE MAH. BAHÇELER CAD NO:22 OFİS ROYAL İŞ MERKEZİ KAT:10/122 AKDENİZ / MERSİN 
+                    </p>
+                    <a href="https://maps.google.com" target="_blank" className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm mt-3 hover:underline">
+                      <Navigation size={14} /> Yol Tarifi Al
+                    </a>
+                  </div>
+                </div>
+
+                {/* Telefon & Mail Kartı */}
+                <div className="flex items-start gap-6 p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-blue-300 transition-colors">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-green-600 shadow-sm shrink-0">
+                    <Phone size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">Doğrudan İletişim</h4>
+                    <div className="space-y-2">
+                      <a href={`tel:${siteConfig.phone}`} className="block text-slate-600 font-medium hover:text-blue-600 transition-colors text-lg">
+                        {siteConfig.phone || "+90 (324) 123 45 67"}
+                      </a>
+                      <a href={`mailto:${siteConfig.email}`} className="block text-slate-500 hover:text-blue-600 transition-colors">
+                        {siteConfig.email || "info@yavuzsahin.com"}
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Saatler */}
+                <div className="flex items-start gap-6 p-6 rounded-3xl bg-slate-50 border border-slate-100 hover:border-blue-300 transition-colors">
+                  <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-orange-500 shadow-sm shrink-0">
+                    <Clock size={24} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-slate-900 text-lg mb-2">Çalışma Saatleri</h4>
+                    <div className="grid grid-cols-2 gap-x-8 text-sm text-slate-500">
+                      <div>Hafta İçi</div>
+                      <div className="font-bold text-slate-700">08:30 - 18:00</div>
+                      <div>Cumartesi</div>
+                      <div className="font-bold text-slate-700">09:30 - 13:00</div>
+                    </div>
+                  </div>
+                </div>
+
               </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-2">Telefon</h3>
-              <p className="text-gray-500 text-sm mb-4">Hafta içi 08:00 - 18:00</p>
-              <a href="tel:+905551234567" className="text-blue-900 font-bold hover:underline text-lg">
-                +90 555 123 45 67
-              </a>
             </div>
 
-            {/* Email */}
-            <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-orange-500 text-center group hover:-translate-y-2 transition-transform">
-              <div className="bg-orange-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-orange-600 group-hover:bg-orange-600 group-hover:text-white transition-colors">
-                <Mail size={28} />
-              </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-2">E-Posta</h3>
-              <p className="text-gray-500 text-sm mb-4">7/24 Bize yazabilirsiniz</p>
-              <a href="mailto:smmmyavuzsahin@hotmail.com" className="text-orange-600 font-bold hover:underline text-lg">
-                smmmyavuzsahin@hotmail.com
-              </a>
-            </div>
-
-            {/* Ofis */}
-            <div className="bg-white p-8 rounded-2xl shadow-xl border-b-4 border-emerald-500 text-center group hover:-translate-y-2 transition-transform">
-              <div className="bg-emerald-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
-                <MapPin size={28} />
-              </div>
-              <h3 className="font-bold text-xl text-gray-900 mb-2">Ofis Adresi</h3>
-              <p className="text-gray-500 text-sm mb-4">Ziyaret için randevu alınız</p>
-              <p className="text-emerald-700 font-bold text-sm">
-                İHSANİYE MAH. BAHÇELER CAD NO:22 <br/>OFİS ROYAL İŞ MERKEZİ KAT:10/122 <br/> AKDENİZ / MERSİN
-              </p>
+            {/* HARİTA (Custom Style) */}
+            <div className="h-80 w-full bg-slate-200 rounded-[2.5rem] overflow-hidden border border-slate-300 relative grayscale hover:grayscale-0 transition-all duration-500 shadow-lg">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51159.27435645009!2d34.600185!3d36.778262!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f4a4c0be6e9f%3A0x4db709849544778d!2sMersin!5e0!3m2!1str!2str!4v1234567890" 
+                width="100%" 
+                height="100%" 
+                style={{ border: 0 }} 
+                allowFullScreen="" 
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
             </div>
           </div>
 
-          {/* Harita ve Form Alanı */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            
-            {/* Sol: İletişim Formu */}
-            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-sm border border-gray-100">
-              <h3 className="text-2xl font-playfair font-bold text-gray-900 mb-2">Mesaj Gönderin</h3>
-              <p className="text-gray-500 mb-8 text-sm">Formu doldurun, en geç 24 saat içinde size dönüş yapalım.</p>
-              <Contact />
-            </div>
-
-            {/* Sağ: Harita ve Ek Bilgi */}
-            <div className="space-y-8">
-              <div className="w-full h-[400px] bg-gray-200 rounded-3xl overflow-hidden shadow-sm border border-gray-200">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3252.9308692840937!2d34.616799175904696!3d36.80188037224673!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1527f30accbb1c31%3A0x601faac3409223a8!2sOfis%20Royal%20%C4%B0%C5%9F%20Merkezi!5e1!3m2!1str!2str!4v1765673446520!5m2!1str!2str"
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen="" 
-                  loading="lazy" 
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-
-              <div className="bg-blue-900 text-white p-8 rounded-3xl flex items-center gap-6 shadow-lg">
-                <div className="bg-white/10 p-4 rounded-full">
-                  <Clock size={32} />
+          {/* --- SAĞ TARA: FORM ALANI (Sticky) --- */}
+          <div className="lg:col-span-1">
+             <div className="bg-slate-900 rounded-[3rem] p-8 md:p-12 text-white sticky top-32 shadow-2xl relative overflow-hidden">
+                {/* Arka Plan Efekti */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
+                
+                <div className="relative z-10 mb-8">
+                  <h3 className="text-3xl font-black mb-2">Hemen Mesaj Gönderin</h3>
+                  <p className="text-slate-400">
+                    Formu doldurun, size en kısa sürede (genellikle 1 saat içinde) dönüş yapalım.
+                  </p>
                 </div>
-                <div>
-                  <h4 className="font-bold text-lg mb-1">Çalışma Saatlerimiz</h4>
-                  <p className="text-blue-100 text-sm">Pazartesi - Cuma: 08:00 - 18:00</p>
-                  <p className="text-blue-100 text-sm">Cumartesi: 08:00 - 13:00</p>
-                </div>
-              </div>
-            </div>
 
+                {/* Contact Bileşeni (Form) - Burada arka planı uyumlu hale getirmek için props geçebilir veya CSS ile oynayabiliriz ama şimdilik standart bileşeni koyuyoruz, koyu zeminde de çalışır. */}
+                <div className="bg-white rounded-3xl p-6 md:p-8 text-slate-900">
+                   <Contact />
+                </div>
+             </div>
           </div>
 
         </div>
-      </section>
+      </div>
 
-      <Footer />
-    </main>
+      
+    </div>
   );
 }

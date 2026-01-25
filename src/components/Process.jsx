@@ -1,74 +1,47 @@
-import { Search, Map, FileText, BarChart } from "lucide-react";
+"use client";
+import React from "react";
+import { Search, FileSignature, TrendingUp, CheckCheck } from "lucide-react";
 
 const steps = [
   {
-    id: 1,
-    title: "Analiz & Tanışma",
-    desc: "Sektörünüzü ve mali yapınızı analiz ediyor, ihtiyaçlarınızı belirliyoruz.",
-    icon: <Search className="w-6 h-6 text-primary" />
+    icon: <Search size={24} />,
+    title: "Analiz",
+    desc: "İhtiyaçlarınızı dinliyor ve mali yapınızı analiz ediyoruz."
   },
   {
-    id: 2,
-    title: "Yol Haritası",
-    desc: "Size en uygun şirket türünü ve vergi avantajlarını planlıyoruz.",
-    icon: <Map className="w-6 h-6 text-primary" />
+    icon: <FileSignature size={24} />,
+    title: "Planlama",
+    desc: "Size en uygun şirket yapısını ve vergi modelini belirliyoruz."
   },
   {
-    id: 3,
-    title: "Süreç Yönetimi",
-    desc: "Kuruluş, beyanname ve SGK işlemlerini hatasız yürütüyoruz.",
-    icon: <FileText className="w-6 h-6 text-primary" />
+    icon: <TrendingUp size={24} />,
+    title: "Uygulama",
+    desc: "Resmi süreçleri başlatıyor ve tüm bürokrasiyi yönetiyoruz."
   },
   {
-    id: 4,
+    icon: <CheckCheck size={24} />,
     title: "Raporlama",
-    desc: "Finansal durumunuzu düzenli raporlarla takip etmenizi sağlıyoruz.",
-    icon: <BarChart className="w-6 h-6 text-primary" />
+    desc: "Düzenli raporlarla finansal durumunuzu takip ediyoruz."
   }
 ];
 
 export default function Process() {
   return (
-    <section className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div className="text-center mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 block">
-            NASIL ÇALIŞIYORUZ?
-          </span>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary">
-            Adım Adım <span className="text-primary">Süreç</span>
-          </h2>
+    <div className="grid md:grid-cols-4 gap-6 relative">
+      {/* Çizgi (Sadece Masaüstü) */}
+      <div className="hidden md:block absolute top-10 left-0 w-full h-0.5 bg-gradient-to-r from-blue-100 via-blue-200 to-blue-100 -z-10"></div>
+      
+      {steps.map((step, index) => (
+        <div key={index} className="flex flex-col items-center text-center group">
+          <div className="w-20 h-20 bg-white rounded-full border-4 border-slate-50 shadow-lg flex items-center justify-center text-slate-400 group-hover:text-blue-600 group-hover:border-blue-100 transition-all duration-300 mb-6 bg-white">
+            {step.icon}
+          </div>
+          <h4 className="text-lg font-bold text-slate-900 mb-2">{step.title}</h4>
+          <p className="text-sm text-slate-500 max-w-[200px] leading-relaxed">
+            {step.desc}
+          </p>
         </div>
-
-        {/* DÜZELTME: Kartları 4 yan yana değil, 2'li gruplar halinde geniş yaptık */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {steps.map((step) => (
-            <div key={step.id} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all flex items-start gap-5">
-              
-              {/* Numara ve İkon */}
-              <div className="relative shrink-0">
-                <div className="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center border border-blue-100">
-                  {step.icon}
-                </div>
-                <span className="absolute -top-3 -right-3 w-6 h-6 bg-primary text-white text-xs font-bold rounded-full flex items-center justify-center border-2 border-white shadow-sm">
-                  {step.id}
-                </span>
-              </div>
-
-              {/* Metin */}
-              <div>
-                <h3 className="font-bold text-lg text-secondary mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-500 leading-relaxed">
-                  {step.desc}
-                </p>
-              </div>
-
-            </div>
-          ))}
-        </div>
-
-      </div>
-    </section>
+      ))}
+    </div>
   );
 }
