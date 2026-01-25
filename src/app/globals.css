@@ -3,75 +3,97 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 15, 23, 42; /* Slate 900 - Koyu Lacivert/Siyah */
-  --background-start-rgb: 255, 255, 255; /* Beyaz */
+  --foreground-rgb: 15, 23, 42; /* Slate 900 */
+  --background-start-rgb: 255, 255, 255;
   --background-end-rgb: 255, 255, 255;
 }
 
-/* --- 1. GENEL AYARLAR --- */
+/* --- 1. GENEL AYARLAR VE MOBİL KORUMASI --- */
 body {
   color: rgb(var(--foreground-rgb));
   background: rgb(var(--background-start-rgb));
   
-  /* Yazıların daha ince ve net görünmesini sağlar (Özellikle Mac ekranlarında) */
+  /* Yazı Netliği */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
-  /* Harfler arası boşlukları optimize eder */
   text-rendering: optimizeLegibility;
+
+  /* MOBİLDE HAYAT KURTARAN KODLAR: */
+  overflow-x: hidden; /* Sağa sola oynamayı %100 engeller */
+  width: 100%;
+  position: relative; /* Taşmaları sınırlar */
 }
 
-/* --- 2. ÖZEL SCROLLBAR (PREMIUM GÖRÜNÜM) --- */
-/* Chrome, Safari, Edge için */
-::-webkit-scrollbar {
-  width: 8px; /* Daha ince */
-  height: 8px; /* Yatay scroll için */
-}
-
-/* Arka plan yolu */
-::-webkit-scrollbar-track {
-  background: #f8fafc; /* Slate 50 - Çok açık gri */
-}
-
-/* Kaydırma çubuğunun kendisi */
-::-webkit-scrollbar-thumb {
-  background: #cbd5e1; /* Slate 300 - Yumuşak gri */
-  border-radius: 10px; /* Yuvarlatılmış köşeler */
-  border: 2px solid #f8fafc; /* Kenarlardan boşluk hissi verir */
-}
-
-/* Üzerine gelince koyulaşsın */
-::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8; /* Slate 400 */
-}
-
-/* --- 3. SEÇİM RENGİ (SELECTION) --- */
-/* Kullanıcı mouse ile yazı seçtiğinde çıkan renk */
-::selection {
-  background-color: #2563eb; /* Blue 600 - Kurumsal Mavi */
-  color: #ffffff;
-}
-
-/* --- 4. YARDIMCI EFEKTLER --- */
-
-/* Sonsuz kayan logoların kenarlarını yumuşatmak için maske */
-/* Hizmetler ve Hakkımızda sayfasındaki marquee alanlarında kullanılıyor */
-.mask-linear-gradient {
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-/* Parlayan metin efekti (İsteğe bağlı vurgular için) */
-.glow-text {
-  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-}
-
-/* --- 5. SWIPER / SLIDER DÜZELTMELERİ (Eğer kullanılırsa) --- */
-/* Resimlerin sürüklenmesini engeller, UX'i iyileştirir */
-img {
+/* Görsellerin mobilde ekrandan taşmasını engeller */
+img, video {
+  max-width: 100%;
+  height: auto;
+  
+  /* Sürüklemeyi engelle (UX) */
   -webkit-user-drag: none;
   -khtml-user-drag: none;
   -moz-user-drag: none;
   -o-user-drag: none;
   user-select: none;
+}
+
+/* --- 2. MOBİL İÇİN OTOMATİK DÜZELTMELER (SİHİRLİ KISIM) --- */
+/* Sen sayfalarda p-32 (büyük boşluk) vermiş olsan bile, 
+   telefondan girince bu kod devreye girer ve boşlukları küçültür.
+*/
+@media (max-width: 768px) {
+  /* Bölümlerin (Section) paddinglerini zorla küçült */
+  section {
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  /* Çok büyük başlıkları mobilde dizginle */
+  h1 { 
+    font-size: 2.5rem !important; 
+    line-height: 1.2 !important; 
+  }
+  
+  h2 { 
+    font-size: 2rem !important; 
+    line-height: 1.3 !important;
+  }
+}
+
+/* --- 3. ÖZEL SCROLLBAR (PREMIUM GÖRÜNÜM) --- */
+::-webkit-scrollbar {
+  width: 6px; /* Mobilde daha kibar dursun diye 8px'den 6px'e çektim */
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+  border: 2px solid #f8fafc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* --- 4. SEÇİM RENGİ --- */
+::selection {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* --- 5. YARDIMCI EFEKTLER --- */
+.mask-linear-gradient {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.glow-text {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
 }

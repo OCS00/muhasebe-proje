@@ -5,16 +5,15 @@ import Footer from "@/components/Footer";
 import WhatsAppBtn from "@/components/WhatsAppBtn";
 import { siteConfig } from "@/data/siteConfig";
 
-// 1. FONT AYARI (Değişken font kullanarak performansı artırdık)
+// 1. FONT AYARI
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
 });
 
-// 2. GELİŞMİŞ SEO VE PAYLAŞIM AYARLARI
+// 2. SEO VE METADATA AYARLARI
 export const metadata = {
-  // Bu ayar, link paylaşırken resimlerin bozuk çıkmasını engeller
   metadataBase: new URL(siteConfig.url || "https://smmmyavuzsahin.com"), 
   
   title: {
@@ -24,7 +23,6 @@ export const metadata = {
   description: siteConfig.description,
   keywords: ["Mali Müşavir", "Mersin Muhasebe", "Yavuz Şahin", "Vergi Danışmanlığı", "Şirket Kuruluşu"],
   
-  // WhatsApp, LinkedIn, Twitter'da paylaşınca çıkacak kart ayarları
   openGraph: {
     title: `${siteConfig.name} | Profesyonel Mali Çözümler`,
     description: siteConfig.description,
@@ -46,7 +44,6 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    // scroll-pt-28: Menüden bir linke tıkladığında Navbar'ın altında kalmasını engeller.
     <html lang="tr" className="scroll-smooth scroll-pt-28">
       <body className={`
         ${inter.variable} 
@@ -57,26 +54,29 @@ export default function RootLayout({ children }) {
         min-h-screen 
         flex 
         flex-col 
-        overflow-x-hidden
         selection:bg-blue-600 selection:text-white
+        /* BODY İÇİN MOBİL KORUMASI */
+        w-full
+        overflow-x-hidden
       `}>
         
         {/* Navbar */}
-        <header className="relative z-[100]">
+        <header className="relative z-[100] w-full">
            <Navbar />
         </header>
 
-        {/* Ana İçerik */}
-        <main className="flex-grow relative z-10">
+        {/* Ana İçerik - BURASI KRİTİK DEĞİŞİKLİK */}
+        {/* max-w-[100vw] ve overflow-x-hidden sayesinde içerik asla ekranı yarıp taşamaz */}
+        <main className="flex-grow relative z-10 w-full max-w-[100vw] overflow-x-hidden">
           {children}
         </main>
 
         {/* Footer */}
-        <footer className="relative z-10">
+        <footer className="relative z-10 w-full">
           <Footer />
         </footer>
         
-        {/* WhatsApp Butonu (En üstte dursun diye z-index yüksek) */}
+        {/* WhatsApp Butonu */}
         <div className="relative z-[101]">
           <WhatsAppBtn />
         </div>
