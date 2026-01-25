@@ -2,69 +2,84 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import WhatsAppBtn from "@/components/WhatsAppBtn"; // Dosya listende gördüm, bunu da ekleyelim tam olsun.
+import WhatsAppBtn from "@/components/WhatsAppBtn";
+import { siteConfig } from "@/data/siteConfig";
 
-// 1. FONT OPTİMİZASYONU (Tüm ağırlıklarıyla Inter)
+// 1. FONT AYARI (Değişken font kullanarak performansı artırdık)
 const inter = Inter({ 
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
-  weight: ["300", "400", "500", "600", "700", "800", "900"] 
 });
 
-// 2. SEO AYARLARI (Google'da nasıl görüneceği)
+// 2. GELİŞMİŞ SEO VE PAYLAŞIM AYARLARI
 export const metadata = {
+  // Bu ayar, link paylaşırken resimlerin bozuk çıkmasını engeller
+  metadataBase: new URL(siteConfig.url || "https://smmmyavuzsahin.com"), 
+  
   title: {
-    template: '%s | SMMM Mali Müşavirlik',
-    default: 'SMMM - Profesyonel Mali Müşavirlik ve Danışmanlık',
+    template: `%s | ${siteConfig.name}`,
+    default: `${siteConfig.name} | Mali Müşavirlik & Danışmanlık`,
   },
-  description: "Şirket kuruluşu, vergi danışmanlığı, SGK işlemleri ve finansal raporlama hizmetleri. Güvenilir ve dijital mali müşavirlik çözümleri.",
-  keywords: ["mali müşavir", "muhasebe", "vergi danışmanlığı", "şirket kurma", "kdv hesaplama", "sgk teşvik"],
-  authors: [{ name: "SMMM Ofis" }],
-  creator: "SMMM Ofis",
-  publisher: "SMMM Ofis",
-  robots: "index, follow",
+  description: siteConfig.description,
+  keywords: ["Mali Müşavir", "Mersin Muhasebe", "Yavuz Şahin", "Vergi Danışmanlığı", "Şirket Kuruluşu"],
+  
+  // WhatsApp, LinkedIn, Twitter'da paylaşınca çıkacak kart ayarları
+  openGraph: {
+    title: `${siteConfig.name} | Profesyonel Mali Çözümler`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    locale: 'tr_TR',
+    type: 'website',
+  },
+  
+  robots: {
+    index: true,
+    follow: true,
+  },
+  
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="tr" className="scroll-smooth">
-      {/* 3. BODY YAPISI:
-        - w-full & overflow-x-hidden: Yatay taşmayı engeller, tam ekran yapar.
-        - min-h-screen & flex-col: Footer'ı her zaman en alta iter.
-        - selection:bg-blue-100: Kullanıcı yazı seçtiğinde mavi olur (Premium his).
-      */}
+    // scroll-pt-28: Menüden bir linke tıkladığında Navbar'ın altında kalmasını engeller.
+    <html lang="tr" className="scroll-smooth scroll-pt-28">
       <body className={`
         ${inter.variable} 
         font-sans 
         antialiased 
-        text-slate-800 
+        text-slate-900 
         bg-white 
-        w-full 
         min-h-screen 
         flex 
         flex-col 
         overflow-x-hidden
-        selection:bg-blue-100 selection:text-blue-900
+        selection:bg-blue-600 selection:text-white
       `}>
         
         {/* Navbar */}
-        <header className="w-full relative z-50">
+        <header className="relative z-[100]">
            <Navbar />
         </header>
 
-        {/* Ana İçerik (Footer'ı aşağı itmesi için flex-grow) */}
-        <main className="flex-grow w-full relative">
+        {/* Ana İçerik */}
+        <main className="flex-grow relative z-10">
           {children}
         </main>
 
         {/* Footer */}
-        <footer className="w-full relative z-40">
+        <footer className="relative z-10">
           <Footer />
         </footer>
         
-        {/* Sağ altta sabit WhatsApp butonu */}
-        <WhatsAppBtn />
+        {/* WhatsApp Butonu (En üstte dursun diye z-index yüksek) */}
+        <div className="relative z-[101]">
+          <WhatsAppBtn />
+        </div>
         
       </body>
     </html>

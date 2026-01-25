@@ -3,21 +3,75 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
+  --foreground-rgb: 15, 23, 42; /* Slate 900 - Koyu Lacivert/Siyah */
+  --background-start-rgb: 255, 255, 255; /* Beyaz */
   --background-end-rgb: 255, 255, 255;
 }
 
-/* 🔥 BURAYI EKLE: Tüm siteyi zorla tam genişlik yap */
-html, body {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* Sağa taşmaları engeller */
+/* --- 1. GENEL AYARLAR --- */
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
+  
+  /* Yazıların daha ince ve net görünmesini sağlar (Özellikle Mac ekranlarında) */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* Harfler arası boşlukları optimize eder */
+  text-rendering: optimizeLegibility;
 }
 
-/* Yazı tipini zorla */
-body {
-  font-family: var(--font-inter), sans-serif;
+/* --- 2. ÖZEL SCROLLBAR (PREMIUM GÖRÜNÜM) --- */
+/* Chrome, Safari, Edge için */
+::-webkit-scrollbar {
+  width: 8px; /* Daha ince */
+  height: 8px; /* Yatay scroll için */
+}
+
+/* Arka plan yolu */
+::-webkit-scrollbar-track {
+  background: #f8fafc; /* Slate 50 - Çok açık gri */
+}
+
+/* Kaydırma çubuğunun kendisi */
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Slate 300 - Yumuşak gri */
+  border-radius: 10px; /* Yuvarlatılmış köşeler */
+  border: 2px solid #f8fafc; /* Kenarlardan boşluk hissi verir */
+}
+
+/* Üzerine gelince koyulaşsın */
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Slate 400 */
+}
+
+/* --- 3. SEÇİM RENGİ (SELECTION) --- */
+/* Kullanıcı mouse ile yazı seçtiğinde çıkan renk */
+::selection {
+  background-color: #2563eb; /* Blue 600 - Kurumsal Mavi */
+  color: #ffffff;
+}
+
+/* --- 4. YARDIMCI EFEKTLER --- */
+
+/* Sonsuz kayan logoların kenarlarını yumuşatmak için maske */
+/* Hizmetler ve Hakkımızda sayfasındaki marquee alanlarında kullanılıyor */
+.mask-linear-gradient {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+/* Parlayan metin efekti (İsteğe bağlı vurgular için) */
+.glow-text {
+  text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+/* --- 5. SWIPER / SLIDER DÜZELTMELERİ (Eğer kullanılırsa) --- */
+/* Resimlerin sürüklenmesini engeller, UX'i iyileştirir */
+img {
+  -webkit-user-drag: none;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -o-user-drag: none;
+  user-select: none;
 }
