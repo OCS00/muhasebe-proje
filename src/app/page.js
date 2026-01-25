@@ -10,7 +10,6 @@ import Stats from "@/components/Stats";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Process from "@/components/Process";
-import HomeBlog from "@/components/HomeBlog"; // NewsSection yerine HomeBlog
 import Faq from "@/components/Faq";
 import Contact from "@/components/Contact";
 import UsefulLinks from "@/components/UsefulLinks";
