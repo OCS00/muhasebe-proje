@@ -3,26 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 51, 65, 85;
-  --background-rgb: 255, 255, 255;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 255, 255, 255;
 }
 
+/* 🔥 BURAYI EKLE: Tüm siteyi zorla tam genişlik yap */
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Sağa taşmaları engeller */
+}
+
+/* Yazı tipini zorla */
 body {
-  color: #334155;
-  background: #ffffff;
-}
-
-/* Scrollbar (Kaydırma Çubuğu) Rengi - Logo Mavisi */
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-}
-::-webkit-scrollbar-thumb {
-  background: #94a3b8;
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #203478; /* Logo Mavisi */
+  font-family: var(--font-inter), sans-serif;
 }

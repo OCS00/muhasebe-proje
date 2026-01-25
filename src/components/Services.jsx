@@ -1,64 +1,44 @@
-import Link from "next/link";
-import { services } from "@/data/servicesData"; // Veriyi doğru import ediyoruz
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import React from 'react';
+
+const services = [
+  { title: "Vergi Danışmanlığı", desc: "Mevzuata tam uyum ve vergi optimizasyonu.", icon: "01" },
+  { title: "Şirket Kuruluşu", desc: "Limited ve Anonim şirket kuruluş süreçleri.", icon: "02" },
+  { title: "Finansal Raporlama", desc: "Aylık ve yıllık detaylı bilanço analizleri.", icon: "03" },
+  { title: "SGK & Bordro", desc: "Personel maaş, prim ve bildirge işlemleri.", icon: "04" },
+  { title: "KDV İadesi", desc: "İhracat ve indirimli oran iade süreçleri.", icon: "05" },
+  { title: "E-Dönüşüm", desc: "E-Fatura, E-Defter geçiş ve teknik destek.", icon: "06" },
+];
 
 export default function Services() {
   return (
-    <section id="hizmetler" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="w-full" id="hizmetler">
+      <div className="max-w-7xl mx-auto px-6">
         
-        {/* Başlık Alanı */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-primary font-bold tracking-widest uppercase text-xs mb-3 block">
-            HİZMETLERİMİZ
-          </span>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-secondary mb-4">
-            İşletmeniz İçin <span className="text-primary">En İyi Çözüm</span>
-          </h2>
-          <p className="text-gray-500">
-            Şahıs firmanıza, şirket ihtiyaçlarına ve büyüklüğüne özel hizmetler sunuyoruz.
-          </p>
-        </div>
-
-        {/* Kartlar - Grid Yapısı (4 Sütun) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-0 border-t border-l border-gray-200">
           {services.map((service, index) => (
             <div 
               key={index} 
-              className="group bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center text-center"
+              className="group relative p-10 border-r border-b border-gray-200 hover:bg-slate-900 transition-colors duration-500 cursor-pointer"
             >
-              {/* İkon */}
-              <div className="mb-6 p-4 bg-gray-50 rounded-full group-hover:bg-primary/10 transition-colors">
+              {/* Numara */}
+              <span className="text-4xl font-black text-gray-200 group-hover:text-blue-500 transition-colors font-sans mb-6 block">
                 {service.icon}
-              </div>
-
+              </span>
+              
               {/* Başlık */}
-              <h3 className="text-xl font-bold text-secondary mb-3 group-hover:text-primary transition-colors">
+              <h3 className="text-2xl font-bold text-slate-900 group-hover:text-white mb-4 font-sans">
                 {service.title}
               </h3>
-
+              
               {/* Açıklama */}
-              <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-                {service.description}
+              <p className="text-gray-500 group-hover:text-gray-400 text-sm leading-relaxed">
+                {service.desc}
               </p>
 
-              {/* Alt Özellikler Listesi */}
-              <ul className="text-left w-full space-y-3 mb-8">
-                {service.features.map((feature, i) => (
-                  <li key={i} className="flex items-center text-sm text-gray-500">
-                    <CheckCircle2 size={16} className="text-primary mr-2 flex-shrink-0" />
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              {/* Buton (Süs amaçlı, tıklanınca iletişime gider) */}
-              <Link 
-                href="/iletisim" 
-                className="mt-auto inline-flex items-center text-primary font-bold text-sm hover:underline"
-              >
-                Detaylı Bilgi <ArrowRight size={16} className="ml-1" />
-              </Link>
+              {/* Ok İkonu */}
+              <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+              </div>
             </div>
           ))}
         </div>

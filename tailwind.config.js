@@ -7,21 +7,24 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        // İŞTE LOGONUN ORİJİNAL RENGİ
-        primary: {
-          DEFAULT: "#203478", // SMMM Logo Mavisi
-          hover: "#1a2b63",   // Üstüne gelince az koyusu
-          light: "#eef2ff",   // Çok açık mavi (Arka plan süsleri için)
-        },
-        secondary: {
-          DEFAULT: "#334155", // Yazılar için koyu gri
-          light: "#64748b",   // Açıklamalar için gri
-        },
-        bg: {
-          DEFAULT: "#ffffff", // Zemin Beyaz
-          alt: "#f8fafc",     // Alternatif Zemin (Açık Gri)
+      // 🔥 BURAYI EKLE: Özel Animasyon Tanımları
+      animation: {
+        'scroll': 'scroll 30s linear infinite',
+      },
+      keyframes: {
+        scroll: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         }
+      },
+      // 🔥 BURAYA KADAR
+      colors: {
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+      },
+      fontFamily: {
+        playfair: ['var(--font-playfair)', 'serif'],
+        inter: ['var(--font-inter)', 'sans-serif'],
       },
     },
   },

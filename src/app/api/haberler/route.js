@@ -1,77 +1,102 @@
-import Parser from "rss-parser";
-import { NextResponse } from "next/server";
+import Parser from 'rss-parser';
+import { NextResponse } from 'next/server';
+import https from 'https';
+
+export const dynamic = 'force-dynamic'; //
+
+const FEED_URLS = [
+  // 1. AloMaliye (En güvenilir kaynak - Limitini artırdık)
+  { 
+    url: 'https://www.alomaliye.com/feed/', 
+    source: 'AloMaliye',
+    type: 'standard',
+    limit: 6 // Buradan daha çok haber alalım
+  },
+
+  // 2. MuhasebeTR (Tamir Modu: Header Temizliği)
+  { 
+    url: 'https://www.muhasebetr.com/rss/rss.xml', 
+    source: 'MuhasebeTR',
+    type: 'fix_xml',
+    limit: 4
+  }
+];
 
 export async function GET() {
+  const agent = new https.Agent({ rejectUnauthorized: false });
   const parser = new Parser({
-    headers: {
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-      'Accept': 'application/rss+xml, application/xml, text/xml; q=0.1',
-    }
+    requestOptions: { agent },
+    headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' },
+    timeout: 5000
   });
 
-  try {
-    const feed = await parser.parseURL("https://feeds.feedburner.com/MuhasebeTr");
+  let news = [];
 
-    // BOZUK KARAKTERLERİ DÜZELTEN FONKSİYON
-    const fixEncoding = (text) => {
-      if (!text) return "";
-      
-      // Tek tek replace zinciri yerine daha güvenli bir yöntem
-      let cleaned = text;
-      
-      // O HATALI OLAN ELMAS SORU İŞARETİNİ TEMİZLE
-      cleaned = cleaned.replace(/\uFFFD/g, ""); 
+  for (const feed of FEED_URLS) {
+    try {
+      let feedData;
 
-      // DİĞER BOZUK KARAKTERLER
-      cleaned = cleaned
-        .replace(/â/g, "'")
-        .replace(/Ã¼/g, "ü").replace(/Ãqc/g, "ü")
-        .replace(/Ãe/g, "Ü").replace(/Ãoe/g, "Ü")
-        .replace(/Å/g, "Ş").replace(/Åe/g, "ş")
-        .replace(/Ã¶/g, "ö").replace(/Ãq/g, "ö")
-        .replace(/Ãd/g, "Ö").replace(/Ã/g, "Ö")
-        .replace(/Ä±/g, "ı").replace(/Ä/g, "İ")
-        .replace(/Äe/g, "ğ").replace(/Ã§/g, "ç")
-        .replace(/&nbsp;/g, " ")
-        .replace(/&#8217;/g, "'")
-        .replace(/&#8211;/g, "-")
-        .replace(/&#8220;/g, '"')
-        .replace(/&#8221;/g, '"');
+      if (feed.type === 'fix_xml') {
+        // 🔥 MUHASEBETR TAMİRİ 🔥
+        const response = await fetch(feed.url);
+        const buffer = await response.arrayBuffer();
+        
+        // 1. Türkçe karakterleri çöz (Windows-1254)
+        const decoder = new TextDecoder('windows-1254'); 
+        let xmlString = decoder.decode(buffer);
 
-      return cleaned;
-    };
+        // 2. XML Başlığını ve Bozuk Karakterleri SİL
+        // "Unclosed root tag" hatasını bu satır çözer:
+        xmlString = xmlString.replace(/<\?xml.*?\?>/, ''); 
+        
+        // Tırnak işaretlerini düzelt
+        xmlString = xmlString.replace(/[“”]/g, '"').replace(/[’‘]/g, "'");
 
-    const sonHaberler = feed.items.slice(0, 3).map((item, index) => {
-      // TARİH DÜZELTME
-      let dateStr = "Güncel";
-      if (item.pubDate) {
-        try {
-          const d = new Date(item.pubDate);
-          if (!isNaN(d.getTime())) {
-            dateStr = d.toLocaleDateString("tr-TR");
-          }
-        } catch (e) { dateStr = "Güncel"; }
+        feedData = await parser.parseString(xmlString);
+
+      } else {
+        // Standart Siteler (AloMaliye)
+        feedData = await parser.parseURL(feed.url);
       }
-      
-      return {
-        id: index,
-        title: fixEncoding(item.title),
-        link: item.link,
-        date: dateStr,
-        content: fixEncoding(item.contentSnippet).substring(0, 100) + "...",
-      };
-    });
 
-    return new NextResponse(JSON.stringify(sonHaberler), {
-      status: 200,
-      headers: { 
-        'Content-Type': 'application/json; charset=utf-8',
-        'Cache-Control': 'no-cache, no-store, must-revalidate' 
-      },
-    });
+      if (feedData.items && feedData.items.length > 0) {
+        // Her kaynaktan belirlenen limit kadar haber al
+        const items = feedData.items.slice(0, feed.limit).map((item) => {
+          let cleanContent = item.contentSnippet || item.content || '';
+          
+          cleanContent = cleanContent
+            .replace(/<[^>]*>?/gm, '') 
+            .replace(/&nbsp;/g, ' ')
+            .replace(/\r\n|\n|\r/g, ' ')
+            .trim();
 
-  } catch (error) {
-    console.error("RSS Hatası:", error);
-    return NextResponse.json({ error: "Haberler alınamadı" }, { status: 500 });
+          return {
+            title: item.title?.trim(),
+            link: item.link,
+            pubDate: item.pubDate || new Date().toISOString(),
+            content: cleanContent.substring(0, 140) + '...',
+            source: feed.source
+          };
+        });
+        
+        console.log(`✅ ${feed.source}: ${items.length} haber başarıyla çekildi.`);
+        news = [...news, ...items];
+      }
+
+    } catch (err) {
+      console.error(`⚠️ HATA (${feed.source}):`, err.message);
+    }
   }
+
+  // Haberleri tarihe göre sırala
+  news.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+  
+  // Toplam 9-10 haberi siteye bas
+  news = news.slice(0, 10);
+
+  if (news.length === 0) {
+    return NextResponse.json({ success: false, error: 'Haber bulunamadı.' }, { status: 500 });
+  }
+
+  return NextResponse.json({ success: true, data: news });
 }
