@@ -42,6 +42,33 @@ export const metadata = {
   },
 };
 
+// 3. GOOGLE İÇİN KİMLİK KARTI (JSON-LD)
+// Bu kısım Google'ın seni "İşletme" olarak tanımasını sağlar.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "AccountingService",
+  "name": siteConfig.name,
+  "image": `${siteConfig.url}/smmm-logo.png`, // Logo varsa burayı görür
+  "description": siteConfig.description,
+  "url": siteConfig.url,
+  "telephone": siteConfig.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": siteConfig.address || "Mersin",
+    "addressLocality": "Mersin",
+    "addressCountry": "TR"
+  },
+  "priceRange": "₺₺",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "08:30",
+      "closes": "18:00"
+    }
+  ]
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="scroll-smooth scroll-pt-28">
@@ -60,13 +87,19 @@ export default function RootLayout({ children }) {
         overflow-x-hidden
       `}>
         
+        {/* Google'ın seni tanıması için gereken gizli kod */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
         {/* Navbar */}
         <header className="relative z-[100] w-full">
            <Navbar />
         </header>
 
-        {/* Ana İçerik - BURASI KRİTİK DEĞİŞİKLİK */}
-        {/* max-w-[100vw] ve overflow-x-hidden sayesinde içerik asla ekranı yarıp taşamaz */}
+        {/* Ana İçerik */}
+        {/* max-w-[100vw] ve overflow-x-hidden ile taşmaları engelliyoruz */}
         <main className="flex-grow relative z-10 w-full max-w-[100vw] overflow-x-hidden">
           {children}
         </main>
