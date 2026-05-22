@@ -168,7 +168,7 @@ export default function TaxCalendar() {
     <div className="flex flex-col h-full bg-white relative">
       
       {/* --- ÜST PANEL --- */}
-      <div className="bg-[#0f172a] p-8 pb-12 relative overflow-hidden text-white rounded-t-[2rem]">
+      <div className="bg-[#0f172a] p-5 pb-10 sm:p-8 sm:pb-12 relative overflow-hidden text-white rounded-t-[2rem]">
         {/* Dekoratif Arka Plan */}
         <div className="absolute top-0 right-0 w-64 h-64 bg-blue-600 rounded-full blur-[80px] opacity-20 -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-48 h-48 bg-purple-600 rounded-full blur-[60px] opacity-10 translate-y-1/2 -translate-x-1/2 pointer-events-none"></div>
@@ -180,7 +180,7 @@ export default function TaxCalendar() {
                 <AlertCircle size={14} />
                 Sıradaki Kritik İşlem
               </div>
-              <h3 className="text-2xl md:text-3xl font-black leading-tight mb-2">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-black leading-tight mb-2">
                 {upcomingEvent?.title || "Yükleniyor..."}
               </h3>
               <p className="text-slate-400 text-sm max-w-sm leading-relaxed">
@@ -203,23 +203,23 @@ export default function TaxCalendar() {
           </div>
 
           {/* Geri Sayım Widget'ı */}
-          <div className="flex items-center gap-4 bg-slate-800/50 rounded-2xl p-4 border border-slate-700/50 backdrop-blur-sm">
-            <div className="p-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-900/50">
-              <Clock className="text-white" size={24} />
+          <div className="flex items-center gap-3 bg-slate-800/50 rounded-2xl p-3 sm:p-4 border border-slate-700/50 backdrop-blur-sm">
+            <div className="p-2.5 sm:p-3 bg-blue-600 rounded-xl shadow-lg shadow-blue-900/50 shrink-0">
+              <Clock className="text-white" size={20} />
             </div>
-            <div className="flex gap-6 text-center">
-              <div>
-                <div className="text-2xl font-black font-mono">{timeLeft.days}</div>
+            <div className="flex gap-3 sm:gap-6 text-center flex-1">
+              <div className="flex-1">
+                <div className="text-xl sm:text-2xl font-black font-mono">{timeLeft.days}</div>
                 <div className="text-[10px] uppercase text-slate-400 font-bold">Gün</div>
               </div>
-              <div className="w-px h-full bg-slate-700"></div>
-              <div>
-                <div className="text-2xl font-black font-mono">{timeLeft.hours}</div>
+              <div className="w-px bg-slate-700 self-stretch"></div>
+              <div className="flex-1">
+                <div className="text-xl sm:text-2xl font-black font-mono">{timeLeft.hours}</div>
                 <div className="text-[10px] uppercase text-slate-400 font-bold">Saat</div>
               </div>
-              <div className="w-px h-full bg-slate-700"></div>
-              <div>
-                <div className="text-2xl font-black font-mono">{timeLeft.minutes}</div>
+              <div className="w-px bg-slate-700 self-stretch"></div>
+              <div className="flex-1">
+                <div className="text-xl sm:text-2xl font-black font-mono">{timeLeft.minutes}</div>
                 <div className="text-[10px] uppercase text-slate-400 font-bold">Dk</div>
               </div>
             </div>
@@ -228,7 +228,7 @@ export default function TaxCalendar() {
       </div>
 
       {/* --- ALT PANEL --- */}
-      <div className="flex-grow bg-slate-50 relative -mt-6 rounded-t-[2rem] p-6 md:p-8 flex flex-col gap-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)]">
+      <div className="flex-grow bg-slate-50 relative -mt-6 rounded-t-[2rem] p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.2)]">
         
         {/* Filtreler */}
         <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
@@ -248,7 +248,7 @@ export default function TaxCalendar() {
         </div>
 
         {/* Liste */}
-        <div className="space-y-3 overflow-y-auto max-h-[400px] pr-2 custom-scrollbar">
+        <div className="space-y-2 sm:space-y-3 overflow-y-auto max-h-[360px] sm:max-h-[400px] pr-1 sm:pr-2 custom-scrollbar">
           <AnimatePresence mode="popLayout">
             {filteredEvents.map((event) => {
               const isSelected = selectedEventId === event.id;
@@ -268,10 +268,10 @@ export default function TaxCalendar() {
                       : "border-slate-200 hover:border-blue-300 hover:shadow-md"
                   }`}
                 >
-                  <div className="p-5 flex items-center justify-between gap-4">
+                  <div className="p-3 sm:p-5 flex items-center justify-between gap-3 sm:gap-4">
                     <div className="flex items-center gap-4">
                       {/* Tarih İkonu */}
-                      <div className={`flex flex-col items-center justify-center w-14 h-14 rounded-xl border ${
+                      <div className={`flex flex-col items-center justify-center w-11 h-11 sm:w-14 sm:h-14 rounded-xl border shrink-0 ${
                         event.priority === 'high' ? 'bg-red-50 border-red-100 text-red-600' : 
                         event.priority === 'medium' ? 'bg-orange-50 border-orange-100 text-orange-600' : 
                         'bg-blue-50 border-blue-100 text-blue-600'
@@ -292,7 +292,7 @@ export default function TaxCalendar() {
                             </span>
                           )}
                         </div>
-                        <h4 className={`font-bold text-base transition-colors ${isSelected ? 'text-blue-600' : 'text-slate-800'}`}>
+                        <h4 className={`font-bold text-sm sm:text-base transition-colors ${isSelected ? 'text-blue-600' : 'text-slate-800'}`}>
                           {event.title}
                         </h4>
                       </div>
