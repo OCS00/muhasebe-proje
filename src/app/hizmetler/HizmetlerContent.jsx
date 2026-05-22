@@ -17,8 +17,7 @@ import {
   BadgeCheck,
   Phone
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { siteConfig } from "@/data/siteConfig";
 
 // --- VERİ SETİ: MÜŞAVİRLİK HİZMETLERİ ---
 const services = [
@@ -101,7 +100,6 @@ export default function Hizmetler() {
 
   return (
     <div className="bg-slate-50 min-h-screen font-sans selection:bg-slate-900 selection:text-white">
-      <Navbar />
 
       {/* --- HERO SECTION: CLEAN CORPORATE --- */}
       <section className="pt-48 pb-24 bg-white relative border-b border-slate-200">
@@ -270,7 +268,7 @@ export default function Hizmetler() {
                <a href="/iletisim" className="inline-flex items-center justify-center gap-2 bg-white text-blue-900 px-8 py-4 rounded-xl font-bold hover:bg-blue-50 transition-colors shadow-lg">
                  <Briefcase size={20} /> Randevu Oluştur
                </a>
-               <a href="tel:+905555555555" className="inline-flex items-center justify-center gap-2 bg-blue-800 text-white border border-blue-700 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors">
+               <a href={`tel:${siteConfig.phone.replace(/[^0-9+]/g, "")}`} className="inline-flex items-center justify-center gap-2 bg-blue-800 text-white border border-blue-700 px-8 py-4 rounded-xl font-bold hover:bg-blue-700 transition-colors">
                  <Phone size={20} /> Bizi Arayın
                </a>
             </div>

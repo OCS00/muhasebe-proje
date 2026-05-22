@@ -4,14 +4,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Navigation } from "lucide-react";
 import Contact from "@/components/Contact";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import { siteConfig } from "@/data/siteConfig";
 
 export default function Iletisim() {
   return (
     <div className="bg-white min-h-screen font-sans">
-      <Navbar />
 
       {/* --- HERO --- */}
       <section className="pt-48 pb-16 bg-[#0b1120] relative overflow-hidden">

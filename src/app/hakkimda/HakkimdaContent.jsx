@@ -15,8 +15,6 @@ import {
   Layers,
   PieChart
 } from "lucide-react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 // --- KAYAN YAZI METNİ (GENEL KURUMSAL) ---
 const marqueeText = "Mali Müşavirlik • Vergi Danışmanlığı • Şirket Kuruluşu • SGK Teşvikleri • E-Dönüşüm • Finansal Raporlama • ";
@@ -90,7 +88,6 @@ export default function Hakkimda() {
 
   return (
     <div ref={containerRef} className="bg-white min-h-screen font-sans selection:bg-blue-600 selection:text-white overflow-hidden">
-      <Navbar />
 
       {/* --- HERO: PRESTİJLİ GİRİŞ --- */}
       <section className="relative h-screen flex items-center justify-center bg-[#0f172a] overflow-hidden">
