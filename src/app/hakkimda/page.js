@@ -9,10 +9,10 @@ export const metadata = {
     description: "Mersin merkezli profesyonel mali müşavirlik ofisi Yavuz Şahin SMMM. 2010'dan bu yana 100+ mükellefe güvenilir vergi danışmanlığı ve muhasebe çözümleri sunuyoruz.",
     locale: "tr_TR",
     type: "website",
-    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM" }],
+    images: [{ url: "https://smmmyavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM" }],
   },
   alternates: {
-    canonical: "https://www.yavuzsahin.com/hakkimda",
+    canonical: "https://smmmyavuzsahin.com/hakkimda",
   },
 };
 

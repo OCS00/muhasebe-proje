@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "YAVUZ ŞAHİN",
   title: "Mali Müşavirlik & Danışmanlık",
   description: "Mersin merkezli, vergi danışmanlığı, şirket kuruluşu ve finansal raporlama hizmetleri sunan profesyonel mali müşavirlik ofisi.",
-  url: "https://www.yavuzsahin.com", // Sitenin gerçek adresi olacak
+  url: "https://smmmyavuzsahin.com",
   
   // İletişim Bilgileri
   email: "smmmyavuzsahin@hotmail.com",

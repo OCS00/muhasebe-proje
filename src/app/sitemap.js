@@ -1,7 +1,7 @@
 import { siteConfig } from "@/data/siteConfig";
 
 export default function sitemap() {
-  const baseUrl = siteConfig.url || "https://www.yavuzsahin.com"; // siteConfig'den çeker, yoksa bunu kullanır
+  const baseUrl = siteConfig.url || "https://smmmyavuzsahin.com"; // siteConfig'den çeker, yoksa bunu kullanır
 
   return [
     {

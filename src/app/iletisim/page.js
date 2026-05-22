@@ -9,10 +9,10 @@ export const metadata = {
     description: "Mersin Akdeniz Ofis Royal İş Merkezi'nde profesyonel mali müşavirlik. Tel: +90 (506) 892 60 26 — Hafta içi 08:30-18:00.",
     locale: "tr_TR",
     type: "website",
-    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM İletişim" }],
+    images: [{ url: "https://smmmyavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM İletişim" }],
   },
   alternates: {
-    canonical: "https://www.yavuzsahin.com/iletisim",
+    canonical: "https://smmmyavuzsahin.com/iletisim",
   },
 };
 

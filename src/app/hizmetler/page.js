@@ -9,10 +9,10 @@ export const metadata = {
     description: "Şirket kuruluşu, vergi danışmanlığı, bordrolama, SGK yönetimi ve e-dönüşüm. Mersin'de profesyonel mali müşavirlik hizmetleri.",
     locale: "tr_TR",
     type: "website",
-    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM Hizmetleri" }],
+    images: [{ url: "https://smmmyavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM Hizmetleri" }],
   },
   alternates: {
-    canonical: "https://www.yavuzsahin.com/hizmetler",
+    canonical: "https://smmmyavuzsahin.com/hizmetler",
   },
 };
 

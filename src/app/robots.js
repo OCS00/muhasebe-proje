@@ -1,7 +1,7 @@
 import { siteConfig } from "@/data/siteConfig";
 
 export default function robots() {
-  const baseUrl = siteConfig.url || "https://www.yavuzsahin.com";
+  const baseUrl = siteConfig.url || "https://smmmyavuzsahin.com";
 
   return {
     rules: {
