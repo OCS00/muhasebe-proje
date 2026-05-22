@@ -48,7 +48,7 @@ export default function Footer() {
     { label: "Ana Sayfa", url: "/" },
     { label: "Hakkımızda", url: "/hakkimda" },
     { label: "Ekibimiz & Kariyer", url: "/hakkimda" },
-    { label: "Blog & Mevzuat", url: "/blog" },
+    { label: "Mevzuat Gündemi", url: "/#haberler" },
     { label: "İletişim", url: "/iletisim" },
   ];
 

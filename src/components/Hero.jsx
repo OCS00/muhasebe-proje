@@ -132,8 +132,8 @@ export default function Hero() {
              className="absolute top-10 right-10 w-4/5 h-4/5 bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border-4 border-white transform rotate-6 z-10"
            >
              {/* Buraya gerçek bir görsel gelebilir, şimdilik modern bir gradient placeholder */}
-             <div className="w-full h-full bg-gradient-to-br from-slate-800 to-black relative">
-               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?q=80&w=2026&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay"></div>
+             <div className="w-full h-full bg-gradient-to-br from-slate-800 via-slate-900 to-black relative">
+               <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 30% 40%, #2563eb 0%, transparent 60%), radial-gradient(circle at 70% 70%, #6366f1 0%, transparent 60%)" }}></div>
                <div className="absolute bottom-0 left-0 p-8">
                  <div className="text-white text-2xl font-black mb-2">Profesyonel<br/>Çözümler</div>
                  <div className="h-1 w-20 bg-blue-500 rounded-full"></div>
