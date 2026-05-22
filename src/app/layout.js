@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppBtn from "@/components/WhatsAppBtn";
 import { Analytics } from "@vercel/analytics/next";
+import CookieConsent from "@/components/CookieConsent";
 import { siteConfig } from "@/data/siteConfig";
 
 const inter = Inter({
@@ -53,9 +54,10 @@ export const metadata = {
   },
 
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: `${siteConfig.name} | Mali Müşavirlik – Mersin`,
     description: siteConfig.description,
+    images: [`${siteConfig.url}/smmm-logo.png`],
   },
 
   robots: {
@@ -168,6 +170,7 @@ export default function RootLayout({ children }) {
         </div>
 
         <Analytics />
+        <CookieConsent />
       </body>
     </html>
   );

@@ -1,5 +1,53 @@
 import React from "react";
 import { Zap, TrendingUp, HelpCircle, MousePointer2, Activity } from "lucide-react";
+import { siteConfig } from "@/data/siteConfig";
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Şirket kuruluşu için hangi belgeler gerekli?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Şirket türüne (Limited, A.Ş., Şahıs) göre değişmekle birlikte; kimlik fotokopisi, ikametgah, kira kontratı ve imza beyannamesi temel evraklardır."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Şahıs şirketi mi Limited şirket mi kurmalıyım?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cironuz, iş modeliniz ve ortaklık yapınız belirleyicidir. Yıllık cironuz belirli bir limitin altındaysa ve tek başınaysanız Şahıs şirketi vergi avantajı sağlar. Ancak kurumsallık ve prestij için Limited şirket önerilir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Genç Girişimci desteğinden kimler yararlanabilir?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "18-29 yaş arası, ilk defa mükellefiyet açan girişimciler; 3 yıl boyunca yıllık 150.000 TL'ye kadar gelir vergisinden muaf tutulur ve 1 yıl boyunca Bağ-Kur primleri devlet tarafından ödenir."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "E-Fatura kullanmak zorunlu mu?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "2023 yılı brüt satış hasılatı 3 Milyon TL ve üzeri olan mükellefler için zorunludur. E-ticaret yapanlar için limitler daha düşüktür."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Aylık muhasebe ücretleri neye göre belirleniyor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "İşlem hacminiz, çalışan sayınız, fatura adediniz ve faaliyet gösterdiğiniz sektöre göre Mali Müşavirler Odası'nın belirlediği asgari tarife üzerinden hesaplanır."
+      }
+    }
+  ]
+};
 
 import Hero from "@/components/Hero";
 import About from "@/components/About";
@@ -17,6 +65,11 @@ import ScrollProgressBar from "@/components/ScrollProgressBar";
 export default function Home() {
   return (
     <div className="flex flex-col w-full bg-white relative font-sans selection:bg-blue-600 selection:text-white">
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       {/* Scroll İlerleme Çubuğu */}
       <ScrollProgressBar />

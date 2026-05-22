@@ -44,8 +44,8 @@ export default function Navbar() {
             {/* Logo Görseli (Her zaman net görünür çünkü zemin beyaz) */}
             <div className="relative w-10 h-10 transition-transform duration-300 group-hover:scale-105">
                <Image 
-                 src="/smmm-logo.png" 
-                 alt="Logo" 
+                 src="/smmm-logo.png"
+                 alt="Yavuz Şahin SMMM Mali Müşavirlik Logo"
                  fill 
                  className="object-contain drop-shadow-sm" 
                  priority

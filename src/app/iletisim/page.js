@@ -6,12 +6,13 @@ export const metadata = {
   keywords: ["Mali Müşavir İletişim", "Muhasebe Ofisi Mersin", "Randevu", "SMMM İletişim"],
   openGraph: {
     title: "İletişim | Yavuz Şahin SMMM",
-    description: "Mersin Akdeniz'de profesyonel mali danışmanlık için bizimle iletişime geçin.",
+    description: "Mersin Akdeniz Ofis Royal İş Merkezi'nde profesyonel mali müşavirlik. Tel: +90 (506) 892 60 26 — Hafta içi 08:30-18:00.",
     locale: "tr_TR",
     type: "website",
+    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM İletişim" }],
   },
   alternates: {
-    canonical: "/iletisim",
+    canonical: "https://www.yavuzsahin.com/iletisim",
   },
 };
 

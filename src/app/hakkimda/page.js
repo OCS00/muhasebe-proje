@@ -6,12 +6,13 @@ export const metadata = {
   keywords: ["Yavuz Şahin", "Mali Müşavir Mersin", "SMMM Mersin", "Muhasebe Ofisi", "Vergi Danışmanı"],
   openGraph: {
     title: "Hakkımızda | Yavuz Şahin SMMM",
-    description: "Mersin merkezli profesyonel mali müşavirlik ofisi. 2010'dan bu yana güvenilir çözümler.",
+    description: "Mersin merkezli profesyonel mali müşavirlik ofisi Yavuz Şahin SMMM. 2010'dan bu yana 100+ mükellefe güvenilir vergi danışmanlığı ve muhasebe çözümleri sunuyoruz.",
     locale: "tr_TR",
     type: "website",
+    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM" }],
   },
   alternates: {
-    canonical: "/hakkimda",
+    canonical: "https://www.yavuzsahin.com/hakkimda",
   },
 };
 

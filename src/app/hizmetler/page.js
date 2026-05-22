@@ -6,12 +6,13 @@ export const metadata = {
   keywords: ["Mali Müşavirlik Hizmetleri", "Şirket Kuruluşu Mersin", "Vergi Danışmanlığı", "Bordrolama", "SGK", "E-Fatura", "KDV İadesi"],
   openGraph: {
     title: "Hizmetlerimiz | Yavuz Şahin SMMM",
-    description: "Şirket kuruluşundan e-dönüşüme kadar tüm mali süreçlerinizde yanınızdayız.",
+    description: "Şirket kuruluşu, vergi danışmanlığı, bordrolama, SGK yönetimi ve e-dönüşüm. Mersin'de profesyonel mali müşavirlik hizmetleri.",
     locale: "tr_TR",
     type: "website",
+    images: [{ url: "https://www.yavuzsahin.com/smmm-logo.png", width: 400, height: 400, alt: "Yavuz Şahin SMMM Hizmetleri" }],
   },
   alternates: {
-    canonical: "/hizmetler",
+    canonical: "https://www.yavuzsahin.com/hizmetler",
   },
 };
 
