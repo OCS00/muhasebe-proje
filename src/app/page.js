@@ -105,7 +105,7 @@ export default function Home() {
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/20 rounded-full blur-[120px]"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/10 rounded-full blur-[120px]"></div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 overflow-hidden">
           <SectionHeader
             dark
             title="Dijital Operasyon Merkezi"
@@ -114,17 +114,17 @@ export default function Home() {
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-12 gap-6 md:gap-8 items-start">
-            <div className="md:col-span-1 lg:col-span-7">
-              <div className="bg-slate-800/50 p-2 rounded-[2rem] md:rounded-[2.5rem] border border-slate-700/50 backdrop-blur-sm">
-                <div className="bg-white rounded-[1.75rem] md:rounded-[2rem] overflow-hidden shadow-2xl">
+            <div className="md:col-span-1 lg:col-span-7 min-w-0 overflow-hidden">
+              <div className="bg-slate-800/50 p-1.5 sm:p-2 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border border-slate-700/50">
+                <div className="bg-white rounded-[1.25rem] sm:rounded-[1.75rem] md:rounded-[2rem] overflow-hidden shadow-2xl">
                   <VatCalculator />
                 </div>
               </div>
             </div>
 
-            <div className="md:col-span-1 lg:col-span-5">
-              <div className="bg-slate-800/50 p-2 rounded-[2rem] md:rounded-[2.5rem] border border-slate-700/50 backdrop-blur-sm h-full">
-                <div className="bg-white rounded-[1.75rem] md:rounded-[2rem] overflow-hidden shadow-2xl h-full">
+            <div className="md:col-span-1 lg:col-span-5 min-w-0 overflow-hidden">
+              <div className="bg-slate-800/50 p-1.5 sm:p-2 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] border border-slate-700/50 h-full">
+                <div className="bg-white rounded-[1.25rem] sm:rounded-[1.75rem] md:rounded-[2rem] overflow-hidden shadow-2xl h-full">
                   <TaxCalendar />
                 </div>
               </div>

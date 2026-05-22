@@ -73,7 +73,7 @@ export default function VatCalculator() {
     <div className="flex flex-col h-full bg-white relative">
       
       {/* --- HEADER --- */}
-      <div className="bg-[#0f172a] p-5 pb-10 sm:p-8 sm:pb-12 rounded-t-[2rem] relative overflow-hidden text-white">
+      <div className="bg-[#0f172a] p-4 pb-10 sm:p-8 sm:pb-12 rounded-t-[2rem] relative overflow-hidden text-white">
         <div className="absolute top-0 right-0 w-40 h-40 bg-blue-600 rounded-full blur-[60px] opacity-20 -translate-y-1/2 translate-x-1/2"></div>
         
         <div className="relative z-10 flex justify-between items-center">
@@ -97,7 +97,7 @@ export default function VatCalculator() {
       </div>
 
       {/* --- BODY --- */}
-      <div className="flex-grow bg-slate-50 relative -mt-6 rounded-t-[2rem] p-4 sm:p-6 md:p-8 flex flex-col gap-4 sm:gap-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
+      <div className="flex-grow bg-slate-50 relative -mt-6 rounded-t-[2rem] p-3 sm:p-6 md:p-8 flex flex-col gap-3 sm:gap-6 shadow-[0_-10px_40px_-15px_rgba(0,0,0,0.1)]">
         
         {/* INPUT ALANI */}
         <div className="bg-white p-2 rounded-2xl shadow-sm border border-slate-200 focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-500/10 transition-all">
@@ -169,7 +169,7 @@ export default function VatCalculator() {
         </div>
 
         {/* SONUÇ KARTI */}
-        <div className="bg-gradient-to-br from-white to-blue-50/50 border border-blue-100 rounded-[1.5rem] p-6 relative overflow-hidden group">
+        <div className="bg-gradient-to-br from-white to-blue-50/50 border border-blue-100 rounded-[1.5rem] p-4 sm:p-6 relative overflow-hidden group">
            {/* Arka plan süsü */}
            <div className="absolute -right-10 -top-10 w-32 h-32 bg-blue-500/5 rounded-full blur-2xl group-hover:bg-blue-500/10 transition-colors"></div>
 
