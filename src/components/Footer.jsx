@@ -4,15 +4,11 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { siteConfig } from "@/data/siteConfig";
-import { 
-  Facebook, 
-  Twitter, 
-  Linkedin, 
-  Instagram, 
-  Mail, 
-  MapPin, 
-  Phone, 
-  ArrowRight, 
+import {
+  Mail,
+  MapPin,
+  Phone,
+  ArrowRight,
   ShieldCheck, 
   Send,
   CheckCircle2,
@@ -60,12 +56,6 @@ export default function Footer() {
     { label: "E-Dönüşüm Hizmetleri", url: "/hizmetler" },
   ];
 
-  const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-  ];
 
   return (
     <footer className="bg-[#050b14] text-slate-300 pt-24 pb-10 border-t border-slate-900 relative overflow-hidden font-sans">
@@ -110,16 +100,22 @@ export default function Footer() {
             </p>
 
             <div className="flex gap-4">
-              {socialLinks.map((social, idx) => (
-                <a 
-                  key={idx} 
-                  href={social.href} 
-                  aria-label={social.label}
-                  className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:-translate-y-1 transition-all duration-300"
-                >
-                  <social.icon size={20} />
-                </a>
-              ))}
+              <a
+                href={`mailto:${siteConfig.email}`}
+                aria-label="E-posta gönder"
+                className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-blue-600 hover:text-white hover:border-blue-500 hover:-translate-y-1 transition-all duration-300"
+              >
+                <Mail size={20} />
+              </a>
+              <a
+                href={`https://wa.me/${siteConfig.phone.replace(/[^0-9]/g, "")}?text=Merhaba, mali müşavirlik hizmetleri hakkında bilgi almak istiyorum.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="WhatsApp ile iletişim"
+                className="w-12 h-12 rounded-2xl bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:bg-green-600 hover:text-white hover:border-green-500 hover:-translate-y-1 transition-all duration-300"
+              >
+                <Phone size={20} />
+              </a>
             </div>
           </div>
 
