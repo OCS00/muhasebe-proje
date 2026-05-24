@@ -130,6 +130,33 @@ const jsonLd = {
   ],
 };
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yavuz Şahin",
+  "jobTitle": "Serbest Muhasebeci Mali Müşavir",
+  "url": siteConfig.url,
+  "email": siteConfig.email,
+  "telephone": siteConfig.phone,
+  "worksFor": {
+    "@type": "AccountingService",
+    "name": `${siteConfig.name} SMMM`,
+    "url": siteConfig.url,
+  },
+  "memberOf": {
+    "@type": "Organization",
+    "name": "Mersin Serbest Muhasebeci Mali Müşavirler Odası",
+  },
+  "knowsAbout": [
+    "Vergi Danışmanlığı",
+    "Muhasebe",
+    "Şirket Kuruluşu",
+    "SGK Danışmanlığı",
+    "E-Fatura",
+    "KDV İadesi",
+  ],
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="tr" className="scroll-smooth scroll-pt-28">
@@ -151,6 +178,10 @@ export default function RootLayout({ children }) {
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
         />
 
         <header className="relative z-[100] w-full">
